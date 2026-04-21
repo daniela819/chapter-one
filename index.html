@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>chapter one. — book club & blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:    #1A47B8; --blue-lt: #EEF2FF;
+      --lavanda: #7B74D4; --lav-lt:  #F3F2FD;
+      --navy:    #1A1A2E; --bg:      #FAFAFA;
+      --bg2:     #F3F2FD; --white:   #ffffff;
+      --ink:     #16162a; --muted:   #6b7280;
+      --border:  #e5e4f0;
+      --serif: 'Lora', Georgia, serif;
+      --sans:  'Raleway', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* UTILS */
+    .tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+    .tag-blue { color: var(--blue); background: var(--blue-lt); border: 1px solid rgba(26,71,184,0.2); }
+    .tag-lav  { color: var(--lavanda); background: var(--lav-lt); border: 1px solid rgba(123,116,212,0.25); }
+
+    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--lavanda); padding-bottom: 14px; border-bottom: 2px solid var(--border); margin-bottom: 36px; display: block; }
+
+    .btn-primary { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--white); background: var(--blue); padding: 13px 26px; border-radius: 6px; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; font-family: var(--sans); }
+    .btn-primary:hover { background: var(--lavanda); transform: translateY(-1px); }
+    .btn-outline { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--blue); border: 1.5px solid var(--blue); padding: 12px 24px; border-radius: 6px; transition: background 0.2s, color 0.2s; }
+    .btn-outline:hover { background: var(--blue); color: var(--white); }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,250,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 62px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-name { font-size: 17px; font-weight: 700; color: var(--ink); }
+    .nav-logo-sub  { font-size: 9px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavanda); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--white); background: var(--blue); padding: 8px 18px; border-radius: 6px; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--lavanda); }
+
+    /* BANNER */
+    .banner { background: var(--navy); border-bottom: 1px solid rgba(123,116,212,0.3); display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; min-height: 50px; }
+    .banner-divider { background: rgba(255,255,255,0.1); }
+    .banner-block { display: flex; align-items: center; gap: 14px; padding: 10px 28px; }
+    .banner-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .banner-dot.reading { background: var(--lavanda); }
+    .banner-dot.club { background: var(--blue); animation: ripple 2s ease-out infinite; }
+    .banner-dot.session { background: #f59e0b; }
+    @keyframes ripple { 0% { box-shadow: 0 0 0 0 rgba(26,71,184,0.6); } 70% { box-shadow: 0 0 0 8px rgba(26,71,184,0); } 100% { box-shadow: 0 0 0 0 rgba(26,71,184,0); } }
+    .banner-text { display: flex; flex-direction: column; gap: 1px; }
+    .banner-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .banner-value { font-size: 12px; font-weight: 500; color: #fff; line-height: 1.3; }
+    .banner-value em { font-style: italic; font-weight: 300; color: rgba(255,255,255,0.7); }
+
+    /* HERO */
+    #inicio { padding: 80px 52px 72px; border-bottom: 1px solid var(--border); animation: fadeUp 0.65s ease both; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); background: var(--blue-lt); border: 1px solid rgba(26,71,184,0.2); padding: 5px 14px; border-radius: 20px; margin-bottom: 24px; }
+    .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+    .hero-title { font-family: var(--serif); font-size: clamp(38px,5vw,64px); line-height: 1.08; font-weight: 600; color: var(--ink); max-width: 700px; }
+    .hero-title em { font-style: italic; color: var(--lavanda); }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+
+    #blog { padding: 72px 52px; border-bottom: 1px solid var(--border); }
+    .blog-layout { display: grid; grid-template-columns: 1fr 260px; gap: 56px; align-items: start; }
+    .blog-posts { display: flex; flex-direction: column; }
+    .post-card { display: grid; grid-template-columns: 1fr 100px; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: opacity 0.2s; text-decoration: none; color: inherit; }
+    .post-card:last-child { border-bottom: none; }
+    .post-card:hover { opacity: 0.72; }
+    .post-card:hover .post-title { color: var(--blue); }
+    .post-tag-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .post-date { font-size: 11px; color: var(--muted); }
+    .post-title { font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.28; color: var(--ink); margin-bottom: 10px; transition: color 0.2s; }
+    .post-excerpt { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+    .post-byline { font-size: 11px; color: var(--lavanda); font-weight: 500; }
+    .post-thumb { width: 100px; height: 100px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; align-self: start; }
+    .pt1 { background: var(--blue-lt); border: 1px solid rgba(26,71,184,0.15); }
+    .pt2 { background: var(--lav-lt);  border: 1px solid rgba(123,116,212,0.2); }
+    .pt3 { background: #f0fdf4; border: 1px solid rgba(34,197,94,0.2); }
+    .pt4 { background: #fef9ee; border: 1px solid rgba(245,158,11,0.2); }
+    .pt5 { background: #fdf2f8; border: 1px solid rgba(236,72,153,0.2); }
+    .blog-sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 0; }
+    .sidebar-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
+    .sidebar-card h3 { font-family: var(--serif); font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 16px; }
+    .sidebar-book { display: flex; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: opacity 0.2s; text-decoration: none; color: inherit; }
+    .sidebar-book:last-of-type { border-bottom: none; }
+    .sidebar-book:hover { opacity: 0.65; }
+    .sidebar-book-spine { width: 8px; flex-shrink: 0; border-radius: 2px; align-self: stretch; }
+    .sp1 { background: var(--blue); } .sp2 { background: var(--lavanda); } .sp3 { background: #059669; } .sp4 { background: #d97706; }
+    .sidebar-book-title { font-size: 12px; font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 2px; }
+    .sidebar-book-author { font-size: 11px; color: var(--muted); }
+
+    /* LIBRERÍA — GRID PORTADAS */
+    #libreria { padding: 72px 52px; border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .library-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; }
+    .library-filters { display: flex; gap: 8px; }
+    .filter-btn { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; border: 1.5px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: var(--sans); }
+    .filter-btn.active, .filter-btn:hover { color: var(--blue); border-color: var(--blue); background: var(--blue-lt); }
+    .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 20px; }
+    .book-card { cursor: pointer; transition: transform 0.2s, opacity 0.2s; }
+    .book-card:hover { transform: translateY(-4px); opacity: 0.85; }
+    .book-card-cover { width: 100%; aspect-ratio: 2/3; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 16px; margin-bottom: 10px; position: relative; overflow: hidden; }
+    .book-card-cover::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; border-radius: 6px 0 0 6px; }
+    .bc1  { background: rgba(26,71,184,0.18);  border: 1px solid rgba(26,71,184,0.25);  } .bc1::before  { background: #1A47B8; }
+    .bc2  { background: rgba(123,116,212,0.2); border: 1px solid rgba(123,116,212,0.28);} .bc2::before  { background: #7B74D4; }
+    .bc3  { background: rgba(37,99,235,0.18);  border: 1px solid rgba(37,99,235,0.25);  } .bc3::before  { background: #2563eb; }
+    .bc4  { background: rgba(67,56,202,0.2);   border: 1px solid rgba(67,56,202,0.28);  } .bc4::before  { background: #4338ca; }
+    .bc5  { background: rgba(109,40,217,0.18); border: 1px solid rgba(109,40,217,0.25); } .bc5::before  { background: #6d28d9; }
+    .bc6  { background: rgba(3,105,161,0.18);  border: 1px solid rgba(3,105,161,0.25);  } .bc6::before  { background: #0369a1; }
+    .bc7  { background: rgba(124,58,237,0.18); border: 1px solid rgba(124,58,237,0.25); } .bc7::before  { background: #7C3AED; }
+    .bc8  { background: rgba(29,78,216,0.18);  border: 1px solid rgba(29,78,216,0.25);  } .bc8::before  { background: #1d4ed8; }
+    .bc9  { background: rgba(55,65,81,0.18);   border: 1px solid rgba(55,65,81,0.25);   } .bc9::before  { background: #374151; }
+    .bc10 { background: rgba(147,51,234,0.18); border: 1px solid rgba(147,51,234,0.25); } .bc10::before { background: #9333ea; }
+    .bc11 { background: rgba(8,145,178,0.18);  border: 1px solid rgba(8,145,178,0.25);  } .bc11::before { background: #0891b2; }
+    .bc12 { background: rgba(190,24,93,0.18);  border: 1px solid rgba(190,24,93,0.25);  } .bc12::before { background: #be185d; }
+    .bc13 { background: rgba(180,83,9,0.18);   border: 1px solid rgba(180,83,9,0.25);   } .bc13::before { background: #b45309; }
+    .bc14 { background: rgba(30,58,95,0.25);   border: 1px solid rgba(30,58,95,0.35);   } .bc14::before { background: #1e3a5f; }
+    .book-card-cover-title { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
+    .book-card-cover-author { font-size: 10px; font-weight: 300; color: var(--muted); }
+    .book-card-year { font-size: 10px; color: var(--muted); margin-bottom: 3px; }
+    .book-card-title { font-size: 12px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+    .stars { display: flex; gap: 2px; margin-top: 5px; }
+    .star { width: 10px; height: 10px; }
+    .star-full { color: var(--lavanda); } .star-empty { color: rgba(123,116,212,0.2); }
+
+    /* BOOK MODAL */
+    .book-modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(22,22,42,0.5); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .book-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .book-modal { background: var(--white); border-radius: 16px; width: 100%; max-width: 480px; padding: 36px; box-shadow: 0 24px 64px rgba(26,26,46,0.18); transform: translateY(20px) scale(0.97); transition: transform 0.25s cubic-bezier(0.34,1.2,0.64,1); position: relative; margin: 20px; }
+    .book-modal-overlay.open .book-modal { transform: translateY(0) scale(1); }
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg2); border: none; cursor: pointer; font-size: 16px; color: var(--muted); display: flex; align-items: center; justify-content: center; }
+    .modal-close:hover { background: var(--border); }
+    .modal-cover { width: 56px; height: 84px; border-radius: 4px 8px 8px 4px; flex-shrink: 0; }
+    .modal-top { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 16px; }
+    .modal-title { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 5px; }
+    .modal-author { font-size: 14px; font-weight: 400; color: var(--muted); margin-bottom: 8px; }
+    .modal-year { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lavanda); }
+    .modal-divider { height: 1px; background: var(--border); margin: 14px 0; }
+    .modal-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+    .modal-stars { display: flex; gap: 4px; margin-bottom: 4px; }
+    .modal-star { font-size: 18px; }
+    .modal-rating-label { font-size: 11px; color: var(--muted); }
+
+    /* PICKS */
+    #picks { padding: 72px 52px; border-bottom: 1px solid var(--border); }
+    .picks-header { display: grid; grid-template-columns: 1fr auto; align-items: end; margin-bottom: 36px; gap: 24px; }
+    .picks-founder { display: flex; align-items: center; gap: 10px; }
+    .founder-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--lavanda)); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: white; flex-shrink: 0; }
+    .founder-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .founder-role { font-size: 11px; color: var(--lavanda); }
+    .picks-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 16px; }
+    .pick-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+    .pick-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,26,46,0.1); }
+    .pick-cover { height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; text-align: center; position: relative; }
+    .pick-cover::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; }
+    .pick-cover-num { font-family: var(--serif); font-size: 32px; font-weight: 600; opacity: 0.2; line-height: 1; margin-bottom: 6px; }
+    .pick-cover-title { font-size: 12px; font-weight: 700; line-height: 1.3; }
+    .pick-cover-author { font-size: 10px; font-weight: 300; margin-top: 4px; opacity: 0.7; }
+    .pc1 { background: var(--blue-lt); color: var(--blue); } .pc1::before { background: var(--blue); }
+    .pc2 { background: var(--lav-lt);  color: var(--lavanda); } .pc2::before { background: var(--lavanda); }
+    .pc3 { background: #f0fdf4; color: #059669; } .pc3::before { background: #059669; }
+    .pc4 { background: #fef9ee; color: #d97706; } .pc4::before { background: #d97706; }
+    .pc5 { background: #fdf2f8; color: #db2777; } .pc5::before { background: #db2777; }
+    .pick-body { padding: 14px 16px; border-top: 1px solid var(--border); }
+    .pick-body-title { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px; line-height: 1.3; }
+    .pick-body-why   { font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.5; font-style: italic; }
+
+    /* ── PART 2: AI BOOK RECOMMENDER ── */
+    #que-leer { padding: 72px 52px; border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .rec-layout { display: grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: start; }
+    .rec-intro h2 { font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 12px; }
+    .rec-intro p { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+    .rec-form { display: flex; flex-direction: column; gap: 14px; }
+    .rec-form label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; display: block; }
+    .rec-input { width: 100%; background: var(--white); border: 1.5px solid var(--border); border-radius: 8px; padding: 12px 16px; font-family: var(--sans); font-size: 14px; color: var(--ink); outline: none; transition: border-color 0.2s; }
+    .rec-input:focus { border-color: var(--lavanda); }
+    .rec-input::placeholder { color: var(--muted); }
+    .rec-genres { display: flex; flex-wrap: wrap; gap: 8px; }
+    .genre-btn { font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: var(--sans); }
+    .genre-btn.active { color: var(--lavanda); border-color: var(--lavanda); background: var(--lav-lt); }
+    .rec-btn { width: 100%; padding: 14px; background: var(--blue); color: white; border: none; border-radius: 8px; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .rec-btn:hover { background: var(--lavanda); }
+    .rec-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .rec-results { display: flex; flex-direction: column; gap: 16px; }
+    .rec-placeholder { background: var(--white); border: 2px dashed var(--border); border-radius: 12px; padding: 48px 32px; text-align: center; }
+    .rec-placeholder-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.5; }
+    .rec-placeholder p { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.7; }
+    .rec-book-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px; display: grid; grid-template-columns: 48px 1fr; gap: 16px; transition: border-color 0.2s; }
+    .rec-book-card:hover { border-color: var(--lavanda); }
+    .rec-book-cover { width: 48px; height: 72px; border-radius: 4px 8px 8px 4px; flex-shrink: 0; }
+    .rec-book-title { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+    .rec-book-author { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+    .rec-book-why { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+    .rec-loading { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 40px; text-align: center; }
+    .rec-loading p { font-size: 14px; color: var(--muted); font-style: italic; }
+    .rec-spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--lavanda); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── KINDLE TIPS ── */
+    #tips-kindle { padding: 72px 52px; border-bottom: 1px solid var(--border); }
+    .tips-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .tip-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: transform 0.2s, box-shadow 0.2s; }
+    .tip-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,26,46,0.08); }
+    .tip-card-icon { font-size: 28px; margin-bottom: 14px; }
+    .tip-card-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .tip-card-body { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.75; }
+    .tip-card-tag { display: inline-block; margin-top: 12px; }
+
+    /* ── JUEGOS ── */
+    #juegos { padding: 72px 52px; border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .games-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .game-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+    .game-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,26,46,0.1); }
+    .game-card-header { padding: 28px 24px 20px; }
+    .game-card-icon { font-size: 36px; margin-bottom: 12px; }
+    .game-card-title { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+    .game-card-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+    .game-card-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .game-card-difficulty { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .game-play-btn { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); text-decoration: none; transition: color 0.2s; background: none; border: none; cursor: pointer; font-family: var(--sans); }
+    .game-play-btn:hover { color: var(--lavanda); }
+
+    /* TRIVIA MODAL */
+    .game-modal-overlay { position: fixed; inset: 0; z-index: 300; background: rgba(22,22,42,0.6); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .game-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .game-modal { background: var(--white); border-radius: 20px; width: 100%; max-width: 540px; padding: 40px; box-shadow: 0 32px 80px rgba(26,26,46,0.2); transform: translateY(20px) scale(0.97); transition: transform 0.25s cubic-bezier(0.34,1.2,0.64,1); position: relative; margin: 20px; max-height: 90vh; overflow-y: auto; }
+    .game-modal-overlay.open .game-modal { transform: translateY(0) scale(1); }
+    .game-modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg2); border: none; cursor: pointer; font-size: 16px; color: var(--muted); display: flex; align-items: center; justify-content: center; }
+    .trivia-q { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); line-height: 1.35; margin-bottom: 24px; }
+    .trivia-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .trivia-opt { padding: 14px 18px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--ink); cursor: pointer; transition: all 0.2s; background: var(--white); font-family: var(--sans); text-align: left; }
+    .trivia-opt:hover { border-color: var(--lavanda); background: var(--lav-lt); color: var(--lavanda); }
+    .trivia-opt.correct { border-color: #059669; background: #f0fdf4; color: #059669; }
+    .trivia-opt.wrong   { border-color: #dc2626; background: #fef2f2; color: #dc2626; }
+    .trivia-feedback { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+    .trivia-feedback.correct { color: #059669; }
+    .trivia-feedback.wrong   { color: #dc2626; }
+    .trivia-score { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .trivia-progress { width: 100%; height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 24px; overflow: hidden; }
+    .trivia-progress-bar { height: 100%; background: var(--lavanda); border-radius: 2px; transition: width 0.4s; }
+
+    /* WORDLE */
+    .wordle-grid { display: flex; flex-direction: column; gap: 6px; align-items: center; margin-bottom: 20px; }
+    .wordle-row { display: flex; gap: 6px; }
+    .wordle-cell { width: 50px; height: 50px; border: 2px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; text-transform: uppercase; transition: background 0.4s, border-color 0.4s; }
+    .wordle-cell.correct  { background: #059669; border-color: #059669; color: white; }
+    .wordle-cell.present  { background: #d97706; border-color: #d97706; color: white; }
+    .wordle-cell.absent   { background: #6b7280; border-color: #6b7280; color: white; }
+    .wordle-cell.active   { border-color: var(--lavanda); }
+    .wordle-keyboard { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+    .wordle-kb-row { display: flex; gap: 4px; }
+    .wordle-key { min-width: 36px; height: 36px; padding: 0 6px; border: none; border-radius: 4px; background: var(--bg2); font-family: var(--sans); font-size: 12px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .wordle-key:hover { background: var(--border); }
+    .wordle-key.correct  { background: #059669; color: white; }
+    .wordle-key.present  { background: #d97706; color: white; }
+    .wordle-key.absent   { background: #9ca3af; color: white; }
+    .wordle-key.wide { min-width: 52px; font-size: 10px; }
+    .wordle-msg { text-align: center; font-size: 14px; font-weight: 600; margin-bottom: 12px; min-height: 22px; color: var(--ink); }
+
+    /* CLUB CTA */
+    #club { padding: 72px 52px; border-bottom: 1px solid var(--border); background: var(--navy); }
+    .club-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .club-inner .section-label { border-color: rgba(255,255,255,0.1); color: var(--lavanda); display: inline-block; }
+    .club-inner h2 { font-family: var(--serif); font-size: 36px; font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 16px; }
+    .club-inner > p { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 40px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .club-perks { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 40px; }
+    .club-perk { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 20px; }
+    .club-perk-icon { font-size: 22px; margin-bottom: 10px; }
+    .club-perk-title { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .club-perk-desc  { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.55; }
+    .club-actions { display: flex; gap: 14px; justify-content: center; }
+    .btn-white { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--navy); background: var(--white); padding: 13px 26px; border-radius: 6px; transition: opacity 0.2s; }
+    .btn-white:hover { opacity: 0.85; }
+    .btn-ghost { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--white); border: 1.5px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 6px; transition: border-color 0.2s; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.7); }
+
+    /* TIP JAR */
+    #tips { padding: 40px 52px; border-bottom: 1px solid var(--border); background: var(--lav-lt); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+    #tips h3 { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); }
+    #tips p   { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; max-width: 420px; }
+    .tip-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .tip-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 12px 22px; border-radius: 8px; transition: transform 0.15s, opacity 0.2s; font-family: var(--sans); }
+    .tip-btn:hover { transform: translateY(-2px); opacity: 0.88; }
+    .tip-bmc { background: #FFDD00; color: #1a1a1a; }
+    .tip-pp  { background: #003087; color: white; }
+
+    /* FOOTER */
+    footer { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; border-top: 1px solid var(--border); background: var(--white); }
+    .footer-col { padding: 44px 40px; border-right: 1px solid var(--border); }
+    .footer-col:last-child { border-right: none; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+    .footer-logo-sub  { font-size: 9px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavanda); }
+    .footer-tagline { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.7; }
+    .footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lavanda); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--blue); }
+    .footer-bottom { padding: 18px 52px; display: flex; justify-content: space-between; align-items: center; background: var(--white); border-top: 1px solid var(--border); }
+    .footer-bottom p { font-size: 11px; color: var(--muted); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 960px) {
+      nav { padding: 0 20px; } .nav-links { display: none; }
+      .banner { grid-template-columns: 1fr; } .banner-divider { display: none; }
+      #inicio { grid-template-columns: 1fr; gap: 36px; padding: 48px 24px; }
+      #blog, #libreria, #picks, #que-leer, #tips-kindle, #juegos, #club, #tips { padding: 48px 24px; }
+      .blog-layout { grid-template-columns: 1fr; }
+      .rec-layout { grid-template-columns: 1fr; }
+      .picks-grid { grid-template-columns: repeat(3,1fr); }
+      .tips-grid, .games-grid, .club-perks { grid-template-columns: 1fr; }
+      .books-grid { grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); }
+      .post-card { grid-template-columns: 1fr; } .post-thumb { display: none; }
+      footer { grid-template-columns: 1fr 1fr; } .footer-col { padding: 28px 20px; }
+      .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <rect x="4" y="8" width="18" height="20" rx="3" stroke="#1A47B8" stroke-width="2"/>
+      <line x1="13" y1="8" x2="13" y2="28" stroke="#1A47B8" stroke-width="2"/>
+      <path d="M22 13 C26 13 28 15.5 28 18 C28 20.5 26 23 22 23" stroke="#1A47B8" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+    <div>
+      <div class="nav-logo-name">chapter one.</div>
+      <div class="nav-logo-sub">Book Club · 2020</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#libreria">Librería</a></li>
+    <li><a href="#que-leer">¿Qué leer?</a></li>
+    <li><a href="#tips-kindle">Tips</a></li>
+    <li><a href="#juegos">Juegos</a></li>
+    <li><a href="#club">El club</a></li>
+  </ul>
+  <a href="#club" class="nav-cta">Unirse</a>
+</nav>
+
+<!-- BANNER -->
+<div class="banner">
+  <div class="banner-block">
+    <div class="banner-dot reading"></div>
+    <div class="banner-text">
+      <span class="banner-label">Ahora leyendo (yo)</span>
+      <span class="banner-value">Un Apartamento en París · <em>Lucy Foley</em></span>
+    </div>
+  </div>
+  <div class="banner-divider"></div>
+  <div class="banner-block">
+    <div class="banner-dot club"></div>
+    <div class="banner-text">
+      <span class="banner-label">Leyendo en el club</span>
+      <span class="banner-value">Un Apartamento en París · <em>Lucy Foley</em></span>
+    </div>
+  </div>
+  <div class="banner-divider"></div>
+  <div class="banner-block">
+    <div class="banner-dot session"></div>
+    <div class="banner-text">
+      <span class="banner-label">Próxima sesión</span>
+      <span class="banner-value">Check-in · <em>mitad del libro</em></span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-eyebrow">Libros · Lecturas · Recomendaciones</div>
+  <h1 class="hero-title">Compartiendo todo lo que gira <em>alrededor de los libros</em></h1>
+  <p style="font-size:16px;font-weight:300;color:var(--muted);line-height:1.85;margin-top:20px;max-width:520px;">Reseñas, autores, estilos, recomendaciones y lo que voy descubriendo mientras leo.</p>
+  <div class="hero-actions">
+    <a href="#blog" class="btn-primary">Ver el blog</a>
+    <a href="#libreria" class="btn-outline">Ver librería</a>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <span class="section-label">Blog · reseñas y reflexiones</span>
+  <div class="blog-layout">
+    <div class="blog-posts">
+      <a href="#" class="post-card">
+        <div>
+          <div class="post-tag-row"><span class="tag tag-lav">Reseña</span><span class="post-date">Enero 2025</span></div>
+          <h2 class="post-title">Mira a Esa Chica: cuando la visibilidad duele</h2>
+          <p class="post-excerpt">Cristina Araujo Gámir construye una novela sobre la paradoja de ser vista sin ser reconocida. La hipersexualización como invisibilidad. Una lectura incómoda y necesaria.</p>
+          <span class="post-byline">Daniela · 8 min</span>
+        </div>
+        <div class="post-thumb pt1"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="6" y="4" width="28" height="32" rx="3" stroke="#1A47B8" stroke-width="1.5"/><line x1="14" y1="4" x2="14" y2="36" stroke="#1A47B8" stroke-width="1.5"/></svg></div>
+      </a>
+      <a href="#" class="post-card">
+        <div>
+          <div class="post-tag-row"><span class="tag tag-blue">Reflexión</span><span class="post-date">Feb 2025</span></div>
+          <h2 class="post-title">Blue Sisters: el duelo como pegamento familiar</h2>
+          <p class="post-excerpt">Coco Mellors escribe sobre lo que queda cuando alguien se va: las peleas, los silencios y el amor que no sabe cómo mostrarse.</p>
+          <span class="post-byline">Daniela · 6 min</span>
+        </div>
+        <div class="post-thumb pt2"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="16" r="8" stroke="#7B74D4" stroke-width="1.5"/><path d="M8 36 C8 28 13 24 20 24 C27 24 32 28 32 36" stroke="#7B74D4" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></div>
+      </a>
+      <a href="#" class="post-card">
+        <div>
+          <div class="post-tag-row"><span class="tag tag-lav">Reseña</span><span class="post-date">Mar 2025</span></div>
+          <h2 class="post-title">Hail Mary Project: la ciencia ficción que te hace querer ser mejor</h2>
+          <p class="post-excerpt">Andy Weir lo hizo de nuevo. Una historia sobre sobrevivir en el espacio que en realidad es sobre la amistad y por qué vale la pena intentarlo.</p>
+          <span class="post-byline">Daniela · 10 min</span>
+        </div>
+        <div class="post-thumb pt3"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="#059669" stroke-width="1.5"/><path d="M14 20 L18 24 L26 16" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+      </a>
+      <a href="#" class="post-card">
+        <div>
+          <div class="post-tag-row"><span class="tag tag-blue">Ensayo</span><span class="post-date">Abr 2025</span></div>
+          <h2 class="post-title">Lo que cinco años de book club me enseñaron sobre escuchar</h2>
+          <p class="post-excerpt">Cuando empecé chapter one. pensaba que era sobre libros. Me tardé tres años en entender que en realidad es sobre las personas que los leen.</p>
+          <span class="post-byline">Daniela · 7 min</span>
+        </div>
+        <div class="post-thumb pt4"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M8 12 L20 6 L32 12 L32 28 L20 34 L8 28 Z" stroke="#d97706" stroke-width="1.5" fill="none"/></svg></div>
+      </a>
+      <a href="#" class="post-card">
+        <div>
+          <div class="post-tag-row"><span class="tag tag-lav">Reflexión</span><span class="post-date">Abr 2025</span></div>
+          <h2 class="post-title">Por qué Pachinko es el libro que más me ha costado soltar</h2>
+          <p class="post-excerpt">Min Jin Lee escribió una saga familiar sobre identidad y sacrificio. Lo terminé hace meses y sigo pensando en Sunja.</p>
+          <span class="post-byline">Daniela · 9 min</span>
+        </div>
+        <div class="post-thumb pt5"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="6" y="8" width="28" height="24" rx="4" stroke="#ec4899" stroke-width="1.5"/></svg></div>
+      </a>
+    </div>
+
+    <aside class="blog-sidebar">
+      <div class="sidebar-card">
+        <h3>Últimas del club</h3>
+        <div class="sidebar-book"><div class="sidebar-book-spine sp1"></div><div><div class="sidebar-book-title">Mira a Esa Chica</div><div class="sidebar-book-author">Cristina Araujo · 2025</div></div></div>
+        <div class="sidebar-book"><div class="sidebar-book-spine sp2"></div><div><div class="sidebar-book-title">Hail Mary Project</div><div class="sidebar-book-author">Andy Weir · 2025</div></div></div>
+        <div class="sidebar-book"><div class="sidebar-book-spine sp3"></div><div><div class="sidebar-book-title">Blue Sisters</div><div class="sidebar-book-author">Coco Mellors · 2025</div></div></div>
+        <div class="sidebar-book"><div class="sidebar-book-spine sp4"></div><div><div class="sidebar-book-title">Pachinko</div><div class="sidebar-book-author">Min Jin Lee · 2024</div></div></div>
+        <div class="sidebar-book" style="border-bottom:none;"><div class="sidebar-book-spine" style="background:#6d28d9;border-radius:2px;"></div><div><div class="sidebar-book-title">Intermezzo</div><div class="sidebar-book-author">Sally Rooney · 2024</div></div></div>
+        <a href="#libreria" style="display:block;text-align:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);text-decoration:none;">Ver librería completa →</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- LIBRERÍA -->
+<section id="libreria">
+  <div class="library-header">
+    <span class="section-label" style="margin-bottom:0">Librería · libros leídos</span>
+    <div class="library-filters">
+      <button class="filter-btn active" onclick="filterBooks('all',this)">Todos</button>
+      <button class="filter-btn" onclick="filterBooks('2025',this)">2025</button>
+      <button class="filter-btn" onclick="filterBooks('2024',this)">2024</button>
+    </div>
+  </div>
+  <div class="books-grid" id="booksGrid"></div>
+</section>
+
+<!-- BOOK MODAL -->
+<div class="book-modal-overlay" id="bookModal" onclick="closeBookModal(event)">
+  <div class="book-modal">
+    <button class="modal-close" onclick="closeBookModalBtn()">✕</button>
+    <div class="modal-top">
+      <div class="modal-cover" id="modalCover"></div>
+      <div><div class="modal-title" id="modalTitle"></div><div class="modal-author" id="modalAuthor"></div><div class="modal-year" id="modalYear"></div></div>
+    </div>
+    <div class="modal-divider"></div>
+    <p class="modal-desc" id="modalDesc"></p>
+    <div class="modal-stars" id="modalStars"></div>
+    <div class="modal-rating-label" id="modalRating"></div>
+  </div>
+</div>
+
+<!-- MIS PICKS -->
+<section id="picks">
+  <div class="picks-header">
+    <div>
+      <span class="section-label" style="margin-bottom:8px">Mis picks</span>
+      <p style="font-size:14px;font-weight:300;color:var(--muted)">Libros que recomiendo personalmente — lecturas que no puedo dejar de mencionar.</p>
+    </div>
+    <div class="picks-founder">
+      <div class="founder-avatar">D</div>
+      <div><div class="founder-name">Daniela</div><div class="founder-role">Fundadora · chapter one.</div></div>
+    </div>
+  </div>
+  <div class="picks-grid">
+    <div class="pick-card"><div class="pick-cover pc1"><div class="pick-cover-num">01</div><div class="pick-cover-title">Know My Name</div><div class="pick-cover-author">Chanel Miller</div></div><div class="pick-body"><div class="pick-body-title">Know My Name</div><div class="pick-body-why">Te rompe y te reconstruye al mismo tiempo.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc2"><div class="pick-cover-num">02</div><div class="pick-cover-title">Not That Bad</div><div class="pick-cover-author">Ed. Roxane Gay</div></div><div class="pick-body"><div class="pick-body-title">Not That Bad</div><div class="pick-body-why">Voces que necesitaban ser escuchadas.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc3"><div class="pick-cover-num">03</div><div class="pick-cover-title">Hood Feminism</div><div class="pick-cover-author">Mikki Kendall</div></div><div class="pick-body"><div class="pick-body-title">Hood Feminism</div><div class="pick-body-why">Necesario e incómodo a partes iguales.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc4"><div class="pick-cover-num">04</div><div class="pick-cover-title">Su Último Día</div><div class="pick-cover-author"></div></div><div class="pick-body"><div class="pick-body-title">Su Último Día</div><div class="pick-body-why">Imposible quedarse indiferente.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc5"><div class="pick-cover-num">05</div><div class="pick-cover-title">Cadáver Exquisito</div><div class="pick-cover-author">Bazterrica</div></div><div class="pick-body"><div class="pick-body-title">Cadáver Exquisito</div><div class="pick-body-why">Perturbadora, brillante y necesaria.</div></div></div>
+  </div>
+</section>
+
+<!-- ¿QUÉ DEBO LEER? — IA -->
+<section id="que-leer">
+  <div class="rec-layout">
+    <div class="rec-intro">
+      <span class="section-label">¿Qué debo leer?</span>
+      <h2>Tu próxima lectura favorita, encontrada por IA</h2>
+      <p>Dime un libro que te haya gustado y yo te sugiero 3 lecturas similares. Cuéntame también qué géneros te interesan para afinar las recomendaciones.</p>
+      <div class="rec-form">
+        <div>
+          <label>Un libro que te gustó</label>
+          <input class="rec-input" id="recBook" placeholder="Ej: Pachinko, Intermezzo, Las Muertas...">
+        </div>
+        <div>
+          <label>¿Qué te interesa? (opcional)</label>
+          <div class="rec-genres" id="recGenres">
+            <button class="genre-btn" onclick="toggleGenre(this)">Romance</button>
+            <button class="genre-btn" onclick="toggleGenre(this)">Thriller</button>
+            <button class="genre-btn" onclick="toggleGenre(this)">No ficción</button>
+            <button class="genre-btn" onclick="toggleGenre(this)">Ciencia ficción</button>
+            <button class="genre-btn" onclick="toggleGenre(this)">Drama familiar</button>
+            <button class="genre-btn" onclick="toggleGenre(this)">Feminismo</button>
+            <button class="genre-btn" onclick="toggleGenre(this)">Literario</button>
+            <button class="genre-btn" onclick="toggleGenre(this)">Histórico</button>
+          </div>
+        </div>
+        <button class="rec-btn" id="recBtn" onclick="getRecommendations()">
+          <span id="recBtnText">✨ Recomiéndame algo</span>
+        </button>
+      </div>
+    </div>
+    <div id="recResults">
+      <div class="rec-placeholder">
+        <div class="rec-placeholder-icon">📚</div>
+        <p>Escribe un libro que hayas disfrutado y te sugiero tres lecturas que podrían encantarte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS KINDLE & LECTURA -->
+<section id="tips-kindle">
+  <span class="section-label">Tips de Kindle & lectura</span>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-card-icon">🌙</div>
+      <div class="tip-card-title">Activa el modo oscuro de noche</div>
+      <div class="tip-card-body">Cambia el brillo al mínimo y activa el tono cálido (sepia) después de las 9pm. Tu vista te lo agradecerá y dormirás mejor después de leer.</div>
+      <span class="tag tag-blue tip-card-tag">Kindle</span>
+    </div>
+    <div class="tip-card">
+      <div class="tip-card-icon">📍</div>
+      <div class="tip-card-title">Usa las notas y subrayados</div>
+      <div class="tip-card-body">Mantén presionado cualquier palabra para subrayar. Todos tus highlights se sincronizan en read.amazon.com — perfectos para las sesiones del club.</div>
+      <span class="tag tag-lav tip-card-tag">Kindle</span>
+    </div>
+    <div class="tip-card">
+      <div class="tip-card-icon">🎯</div>
+      <div class="tip-card-title">Ponle meta de páginas diarias</div>
+      <div class="tip-card-body">Kindle tiene un "Reading Progress" que te dice cuánto tiempo falta para terminar el capítulo o el libro. Úsalo para proponerte 30 minutos al día.</div>
+      <span class="tag tag-blue tip-card-tag">Hábito</span>
+    </div>
+    <div class="tip-card">
+      <div class="tip-card-icon">📱</div>
+      <div class="tip-card-title">Sincroniza con la app del celular</div>
+      <div class="tip-card-body">Instala Kindle en tu teléfono. Así puedes leer en la fila del súper, en el médico o donde sea. La sincronización es automática entre dispositivos.</div>
+      <span class="tag tag-lav tip-card-tag">Kindle</span>
+    </div>
+    <div class="tip-card">
+      <div class="tip-card-icon">🔕</div>
+      <div class="tip-card-title">Crea un ritual de lectura</div>
+      <div class="tip-card-body">Pon el teléfono en otro cuarto, prepara algo de tomar y designa 20 minutos solo para leer. La consistencia importa más que la cantidad.</div>
+      <span class="tag tag-blue tip-card-tag">Hábito</span>
+    </div>
+    <div class="tip-card">
+      <div class="tip-card-icon">📤</div>
+      <div class="tip-card-title">Envía EPUBs a tu Kindle gratis</div>
+      <div class="tip-card-body">Desde tu cuenta Amazon puedes encontrar tu correo de Kindle. Envíate cualquier EPUB como adjunto y aparece en tu biblioteca automáticamente.</div>
+      <span class="tag tag-lav tip-card-tag">Kindle</span>
+    </div>
+  </div>
+</section>
+
+<!-- JUEGOS -->
+<section id="juegos">
+  <span class="section-label">Juegos literarios</span>
+  <div class="games-grid">
+    <div class="game-card">
+      <div class="game-card-header">
+        <div class="game-card-icon">🎯</div>
+        <div class="game-card-title">Trivia literaria</div>
+        <div class="game-card-desc">Pon a prueba tus conocimientos sobre los libros que hemos leído en chapter one. 10 preguntas, cronómetro mental y mucho orgullo lector.</div>
+      </div>
+      <div class="game-card-footer">
+        <span class="game-card-difficulty">10 preguntas · Fácil–Difícil</span>
+        <button class="game-play-btn" onclick="openTrivia()">Jugar →</button>
+      </div>
+    </div>
+    <div class="game-card">
+      <div class="game-card-header">
+        <div class="game-card-icon">📝</div>
+        <div class="game-card-title">Wordle literario</div>
+        <div class="game-card-desc">Adivina el título o autor escondido en 6 intentos. Cada día una palabra nueva relacionada con nuestras lecturas.</div>
+      </div>
+      <div class="game-card-footer">
+        <span class="game-card-difficulty">6 intentos · Diario</span>
+        <button class="game-play-btn" onclick="openWordle()">Jugar →</button>
+      </div>
+    </div>
+    <div class="game-card">
+      <div class="game-card-header">
+        <div class="game-card-icon">🧩</div>
+        <div class="game-card-title">Próximamente</div>
+        <div class="game-card-desc">Crucigrama literario con personajes, autores y títulos de nuestras lecturas. En construcción — ¡vuelve pronto!</div>
+      </div>
+      <div class="game-card-footer">
+        <span class="game-card-difficulty">Próximamente</span>
+        <span class="game-card-difficulty" style="color:var(--lavanda)">🔜</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRIVIA MODAL -->
+<div class="game-modal-overlay" id="triviaModal" onclick="closeTriviaOutside(event)">
+  <div class="game-modal">
+    <button class="game-modal-close" onclick="closeTrivia()">✕</button>
+    <div id="triviaContent"></div>
+  </div>
+</div>
+
+<!-- WORDLE MODAL -->
+<div class="game-modal-overlay" id="wordleModal" onclick="closeWordleOutside(event)">
+  <div class="game-modal">
+    <button class="game-modal-close" onclick="closeWordle()">✕</button>
+    <div id="wordleContent"></div>
+  </div>
+</div>
+
+<!-- CLUB CTA -->
+<section id="club">
+  <div class="club-inner">
+    <span class="section-label">chapter one. book club</span>
+    <h2>¿Te interesa el club de lectura?</h2>
+    <p>Somos 13 personas que nos reunimos en línea dos veces al mes para hablar de libros con honestidad. Sin requisitos, sin presión.</p>
+    <div class="club-perks">
+      <div class="club-perk"><div class="club-perk-icon">📚</div><div class="club-perk-title">Un libro al mes</div><div class="club-perk-desc">Elegido entre todos los miembros.</div></div>
+      <div class="club-perk"><div class="club-perk-icon">💬</div><div class="club-perk-title">2 sesiones en línea</div><div class="club-perk-desc">Check-in a la mitad y cierre al terminar.</div></div>
+      <div class="club-perk"><div class="club-perk-icon">✉️</div><div class="club-perk-title">Newsletter mensual</div><div class="club-perk-desc">Entre Páginas: reseñas y próximo libro.</div></div>
+    </div>
+    <div class="club-actions">
+      <a href="mailto:hola@chapterone.club" class="btn-white">Quiero unirme</a>
+      <a href="#blog" class="btn-ghost">Leer el blog primero</a>
+    </div>
+  </div>
+</section>
+
+<!-- TIP JAR -->
+<section id="tips">
+  <h3>☕ ¿Te gustó el contenido?</h3>
+  <p>Si mis reseñas te ayudaron a encontrar tu próxima lectura favorita, puedes invitarme un café.</p>
+  <div class="tip-buttons">
+    <a href="https://buymeacoffee.com" target="_blank" class="tip-btn tip-bmc">☕ Buy Me a Coffee</a>
+    <a href="https://paypal.me" target="_blank" class="tip-btn tip-pp">PayPal</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-col">
+    <div class="footer-logo">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="18" height="20" rx="3" stroke="#1A47B8" stroke-width="2"/><line x1="13" y1="8" x2="13" y2="28" stroke="#1A47B8" stroke-width="2"/><path d="M22 13 C26 13 28 15.5 28 18 C28 20.5 26 23 22 23" stroke="#1A47B8" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      <div><div class="footer-logo-name">chapter one.</div><div class="footer-logo-sub">Book Club · 2020</div></div>
+    </div>
+    <p class="footer-tagline">Blog de reseñas y reflexiones literarias. Y un club de lectura en línea desde 2020.</p>
+  </div>
+  <div class="footer-col"><h4>Contenido</h4><ul><li><a href="#blog">Blog</a></li><li><a href="#libreria">Librería</a></li><li><a href="#picks">Mis picks</a></li><li><a href="#que-leer">¿Qué leer?</a></li></ul></div>
+  <div class="footer-col"><h4>Extras</h4><ul><li><a href="#tips-kindle">Tips Kindle</a></li><li><a href="#juegos">Juegos</a></li><li><a href="#club">El club</a></li><li><a href="#">Entre Páginas</a></li></ul></div>
+  <div class="footer-col"><h4>Apóyame</h4><ul><li><a href="https://buymeacoffee.com" target="_blank">Buy Me a Coffee</a></li><li><a href="https://paypal.me" target="_blank">PayPal</a></li><li><a href="#">Instagram</a></li><li><a href="#">Contacto</a></li></ul></div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 chapter one. Todos los derechos reservados.</p>
+  <p>Hecho con amor por los libros.</p>
+</div>
+
+<script>
+// ── BOOK DATA ──
+const books = [
+  { id:1,  title:'Mira a Esa Chica',         author:'Cristina Araujo',      year:'2025', cls:'bc1', desc:'Una novela que incomoda de la mejor manera. Explora la paradoja de ser vista sin ser reconocida. Primera lectura del club en 2025.', rating:4 },
+  { id:2,  title:'Hail Mary Project',         author:'Andy Weir',            year:'2025', cls:'bc2', desc:'Ciencia ficción que te hace querer ser mejor persona. Un astronauta solo en el espacio que debe salvar la humanidad.', rating:5 },
+  { id:3,  title:'Blue Sisters',              author:'Coco Mellors',         year:'2025', cls:'bc3', desc:'Una novela sobre hermanas, duelo y el amor que no sabe cómo mostrarse. Escrita con una precisión que duele.', rating:4 },
+  { id:4,  title:'Pachinko',                  author:'Min Jin Lee',          year:'2024', cls:'bc4', desc:'Cuatro generaciones de una familia coreana. Identidad, sacrificio y lo que heredamos sin pedirlo. Imposible soltar.', rating:5 },
+  { id:5,  title:'Intermezzo',                author:'Sally Rooney',         year:'2024', cls:'bc5', desc:'Sally Rooney en su versión más madura. Dos hermanos, una pérdida y relaciones que no caben en ninguna categoría.', rating:3 },
+  { id:6,  title:'Siddharta',                 author:'Hermann Hesse',        year:'2024', cls:'bc6', desc:'Se lee en pocas horas pero se digiere durante semanas. La búsqueda del sentido de la vida con serenidad envidiable.', rating:4 },
+  { id:7,  title:'La Vida Invisible de Rue',  author:'',                     year:'2024', cls:'bc7', desc:'Una historia sobre lo que elegimos no ver y lo que nos cuesta cuando finalmente miramos. Emocionalmente honesta.', rating:4 },
+  { id:8,  title:'Persona Normal',            author:'Sally Rooney',         year:'2024', cls:'bc8', desc:'La novela que hizo que todo el mundo hablara de Sally Rooney. Connell y Marianne y la complejidad de quererse sin saber cómo.', rating:5 },
+  { id:9,  title:'Las Muertas',               author:'Jorge Ibargüengoitia', year:'2024', cls:'bc9', desc:'Perturbadora, basada en hechos reales y narrada con ironía que descoloca. De esas lecturas que sigues pensando semanas después.', rating:5 },
+  { id:10, title:'El Amor que Dejamos Atrás', author:'',                     year:'2024', cls:'bc10', desc:'Una historia sobre las personas que fuimos y las que decidimos no seguir siendo. Dolorosa y hermosa a partes iguales.', rating:3 },
+  { id:11, title:'Un Cuento Perfecto',        author:'Elísabet Benavent',    year:'2024', cls:'bc11', desc:'Romántica y más profunda de lo que aparenta. Perfecta para leer en un fin de semana.', rating:4 },
+  { id:12, title:'Su Último Día',             author:'',                     year:'2024', cls:'bc12', desc:'Un thriller que no suelta hasta la última página. De esos libros que te hacen cancelar planes.', rating:4 },
+  { id:13, title:'El Juego de los Deseos',    author:'',                     year:'2024', cls:'bc13', desc:'Oscuro, adictivo y con personajes que te perturban. Imposible quedarse indiferente.', rating:3 },
+  { id:14, title:'Cadáver Exquisito',         author:'Agustina Bazterrica',  year:'2024', cls:'bc14', desc:'Distopía sobre el canibalismo como metáfora del consumismo. Brillante e incómoda. No es para todos, pero es imprescindible.', rating:4 },
+];
+
+function starHTML(n) {
+  let s='';
+  for(let i=1;i<=5;i++) s+=`<svg class="star ${i<=n?'star-full':'star-empty'}" viewBox="0 0 12 12"><polygon points="6,1 7.8,4.6 12,5.2 9,8.1 9.7,12 6,10.1 2.3,12 3,8.1 0,5.2 4.2,4.6" fill="currentColor"/></svg>`;
+  return s;
+}
+
+function renderBooks(filter) {
+  const filtered = filter==='all' ? books : books.filter(b=>b.year===filter);
+  const grid = document.getElementById('booksGrid');
+  grid.innerHTML = filtered.map(b=>`
+    <div class="book-card" onclick="openBookModal(${b.id})">
+      <div class="book-card-cover ${b.cls}">
+        <div class="book-card-cover-title">${b.title}</div>
+        <div class="book-card-cover-author">${b.author}</div>
+      </div>
+      <div class="book-card-year">${b.year}</div>
+      <div class="book-card-title">${b.title}</div>
+      <div class="stars">${starHTML(b.rating)}</div>
+    </div>`).join('');
+}
+
+function filterBooks(year,btn) {
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBooks(year);
+}
+
+function openBookModal(id) {
+  const b = books.find(x=>x.id===id);
+  document.getElementById('modalTitle').textContent = b.title;
+  document.getElementById('modalAuthor').textContent = b.author || 'Autor no especificado';
+  document.getElementById('modalYear').textContent = b.year;
+  document.getElementById('modalDesc').textContent = b.desc;
+  const cover = document.getElementById('modalCover');
+  cover.className = 'modal-cover ' + b.cls;
+  const starsEl = document.getElementById('modalStars');
+  starsEl.innerHTML = '';
+  for(let i=1;i<=5;i++){const s=document.createElement('span');s.className='modal-star';s.textContent=i<=b.rating?'★':'☆';s.style.color=i<=b.rating?'#7B74D4':'#d1d5db';starsEl.appendChild(s);}
+  document.getElementById('modalRating').textContent = `Calificación del club: ${b.rating}/5`;
+  document.getElementById('bookModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeBookModal(e){ if(e.target===document.getElementById('bookModal')) closeBookModalBtn(); }
+function closeBookModalBtn(){ document.getElementById('bookModal').classList.remove('open'); document.body.style.overflow=''; }
+
+renderBooks('all');
+
+// ── AI RECOMMENDATIONS ──
+function toggleGenre(btn){ btn.classList.toggle('active'); }
+
+async function getRecommendations() {
+  const book = document.getElementById('recBook').value.trim();
+  if(!book){ document.getElementById('recBook').focus(); return; }
+  const genres = [...document.querySelectorAll('.genre-btn.active')].map(b=>b.textContent).join(', ');
+  const btn = document.getElementById('recBtn');
+  btn.disabled = true;
+  document.getElementById('recBtnText').textContent = 'Buscando...';
+  document.getElementById('recResults').innerHTML = `<div class="rec-loading"><div class="rec-spinner"></div><p>Buscando recomendaciones para fans de "${book}"...</p></div>`;
+
+  const prompt = `Eres una lectora apasionada y experta en literatura. Una persona leyó "${book}"${genres ? ` y le interesan géneros como: ${genres}` : ''} y quiere saber qué leer a continuación.
+
+Recomienda exactamente 3 libros similares. Responde ÚNICAMENTE en JSON válido, sin texto extra, sin markdown, sin backticks. Formato:
+[{"title":"...","author":"...","why":"Una oración corta y específica de por qué le va a gustar si disfrutó ${book}","color":"#xxxxxx"}]
+
+Los colores deben ser colores bonitos tipo #1A47B8 o #7B74D4 o similares, uno diferente por libro. Why debe ser conversacional y entusiasta, máximo 20 palabras.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:1000, messages:[{role:'user',content:prompt}] })
+    });
+    const data = await res.json();
+    const text = data.content.find(c=>c.type==='text')?.text || '[]';
+    const clean = text.replace(/```json|```/g,'').trim();
+    const recs = JSON.parse(clean);
+    renderRecs(recs, book);
+  } catch(e) {
+    document.getElementById('recResults').innerHTML = `<div class="rec-placeholder"><div class="rec-placeholder-icon">😔</div><p>Algo salió mal. Intenta de nuevo en un momento.</p></div>`;
+  }
+  btn.disabled = false;
+  document.getElementById('recBtnText').textContent = '✨ Recomiéndame algo';
+}
+
+function renderRecs(recs, book) {
+  if(!recs.length){ document.getElementById('recResults').innerHTML=`<div class="rec-placeholder"><p>No encontré recomendaciones. Intenta con otro libro.</p></div>`; return; }
+  document.getElementById('recResults').innerHTML = `
+    <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--lavanda);margin-bottom:16px;">Si te gustó "${book}", prueba con:</p>
+    ${recs.map(r=>`
+      <div class="rec-book-card">
+        <div class="rec-book-cover" style="background:${r.color}20;border:1px solid ${r.color}40;"></div>
+        <div>
+          <div class="rec-book-title">${r.title}</div>
+          <div class="rec-book-author">${r.author}</div>
+          <div class="rec-book-why">${r.why}</div>
+        </div>
+      </div>`).join('')}`;
+}
+
+// ── TRIVIA ──
+const triviaQ = [
+  { q:"¿Quién escribió Pachinko?", opts:["Min Jin Lee","Sally Rooney","Coco Mellors","Hermann Hesse"], ans:0 },
+  { q:"¿En qué año empezó chapter one.?", opts:["2018","2019","2020","2021"], ans:2 },
+  { q:"¿Quién escribió Blue Sisters?", opts:["Roxane Gay","Coco Mellors","Chanel Miller","Agustina Bazterrica"], ans:1 },
+  { q:"¿Cuál fue la primera lectura del club en 2025?", opts:["Blue Sisters","Hail Mary Project","Mira a Esa Chica","Intermezzo"], ans:2 },
+  { q:"¿Quién escribió Cadáver Exquisito?", opts:["Jorge Ibargüengoitia","Agustina Bazterrica","Elísabet Benavent","Sally Rooney"], ans:1 },
+  { q:"¿Cuántos miembros tiene chapter one.?", opts:["10","11","12","13"], ans:3 },
+  { q:"¿Quién escribió Intermezzo?", opts:["Min Jin Lee","Coco Mellors","Sally Rooney","Hermann Hesse"], ans:2 },
+  { q:"¿Qué libro de Andy Weir leyeron en el club?", opts:["El Marciano","Hail Mary Project","Artemis","El Proyecto Ares"], ans:1 },
+  { q:"¿Quién escribió Siddharta?", opts:["Paulo Coelho","Khalil Gibran","Hermann Hesse","Jorge Ibargüengoitia"], ans:2 },
+  { q:"¿Qué libro están leyendo actualmente en el club?", opts:["Blue Sisters","Pachinko","Un Apartamento en París","Intermezzo"], ans:2 },
+];
+
+let tIdx=0, tScore=0, tAnswered=false;
+
+function openTrivia(){
+  tIdx=0; tScore=0; tAnswered=false;
+  document.getElementById('triviaModal').classList.add('open');
+  document.body.style.overflow='hidden';
+  renderTriviaQ();
+}
+function closeTrivia(){ document.getElementById('triviaModal').classList.remove('open'); document.body.style.overflow=''; }
+function closeTriviaOutside(e){ if(e.target===document.getElementById('triviaModal')) closeTrivia(); }
+
+function renderTriviaQ(){
+  if(tIdx>=triviaQ.length){ renderTriviaEnd(); return; }
+  const q=triviaQ[tIdx];
+  const pct=Math.round((tIdx/triviaQ.length)*100);
+  document.getElementById('triviaContent').innerHTML=`
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <span style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--lavanda)">Pregunta ${tIdx+1}/${triviaQ.length}</span>
+      <span style="font-size:12px;font-weight:600;color:var(--muted)">⭐ ${tScore} puntos</span>
+    </div>
+    <div class="trivia-progress"><div class="trivia-progress-bar" style="width:${pct}%"></div></div>
+    <div class="trivia-q">${q.q}</div>
+    <div class="trivia-options">${q.opts.map((o,i)=>`<button class="trivia-opt" onclick="answerTrivia(${i})">${o}</button>`).join('')}</div>
+    <div class="trivia-feedback" id="tfb"></div>`;
+}
+
+function answerTrivia(i){
+  if(tAnswered) return;
+  tAnswered=true;
+  const q=triviaQ[tIdx];
+  const opts=document.querySelectorAll('.trivia-opt');
+  const fb=document.getElementById('tfb');
+  if(i===q.ans){ tScore++; opts[i].classList.add('correct'); fb.textContent='✅ ¡Correcto!'; fb.className='trivia-feedback correct'; }
+  else { opts[i].classList.add('wrong'); opts[q.ans].classList.add('correct'); fb.textContent='❌ No era esa. La correcta era: '+q.opts[q.ans]; fb.className='trivia-feedback wrong'; }
+  setTimeout(()=>{ tIdx++; tAnswered=false; renderTriviaQ(); }, 1400);
+}
+
+function renderTriviaEnd(){
+  const msg = tScore>=8?'¡Eres una lectora experta! 🏆':tScore>=5?'¡Muy bien! Claramente lees con atención 📚':'¡Hay que leer más! Pero por eso estamos aquí 😄';
+  document.getElementById('triviaContent').innerHTML=`
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">${tScore>=8?'🏆':tScore>=5?'📚':'📖'}</div>
+      <div style="font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);margin-bottom:10px;">${tScore}/10 puntos</div>
+      <div style="font-size:15px;color:var(--muted);margin-bottom:28px;">${msg}</div>
+      <button class="btn-primary" onclick="openTrivia()">Jugar de nuevo</button>
+    </div>`;
+}
+
+// ── WORDLE ──
+const wordleWords = ['LEER','LIBRO','PAGINA','AUTOR','TRAMA','NOVELA','FICCION','CLUB'];
+let wWord='', wGuesses=[], wCurrent='', wDone=false;
+
+function openWordle(){
+  wWord = wordleWords[Math.floor(Math.random()*wordleWords.length)];
+  wGuesses=[]; wCurrent=''; wDone=false;
+  document.getElementById('wordleModal').classList.add('open');
+  document.body.style.overflow='hidden';
+  renderWordle();
+}
+function closeWordle(){ document.getElementById('wordleModal').classList.remove('open'); document.body.style.overflow=''; }
+function closeWordleOutside(e){ if(e.target===document.getElementById('wordleModal')) closeWordle(); }
+
+function renderWordle(){
+  const len=wWord.length; const maxR=6;
+  let grid='<div class="wordle-grid">';
+  for(let r=0;r<maxR;r++){
+    grid+='<div class="wordle-row">';
+    for(let c=0;c<len;c++){
+      let cls='wordle-cell', ch='';
+      if(r<wGuesses.length){ ch=wGuesses[r][c]||''; cls+=' '+(wGuesses[r].colors[c]||''); }
+      else if(r===wGuesses.length){ ch=wCurrent[c]||''; if(c===wCurrent.length) cls+=' active'; }
+      grid+=`<div class="${cls}">${ch}</div>`;
+    }
+    grid+='</div>';
+  }
+  grid+='</div>';
+
+  const keys=[['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L','Ñ'],['↵','Z','X','C','V','B','N','M','⌫']];
+  const kState={};
+  wGuesses.forEach(g=>{ for(let i=0;i<g.length;i++){ const st=g.colors[i]; if(!kState[g[i]]||st==='correct') kState[g[i]]=st; } });
+  let kb='<div class="wordle-keyboard">';
+  keys.forEach(row=>{ kb+='<div class="wordle-kb-row">'; row.forEach(k=>{ const w=(k==='↵'||k==='⌫')?'wide':''; const st=kState[k]||''; kb+=`<button class="wordle-key ${w} ${st}" onclick="wordleKey('${k}')">${k}</button>`; }); kb+='</div>'; });
+  kb+='</div>';
+
+  document.getElementById('wordleContent').innerHTML=`
+    <div style="text-align:center;margin-bottom:16px;">
+      <span style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--lavanda)">Wordle literario · ${len} letras</span>
+    </div>
+    <div class="wordle-msg" id="wMsg"></div>
+    ${grid}${kb}`;
+}
+
+function wordleKey(k){
+  if(wDone) return;
+  if(k==='⌫'){ wCurrent=wCurrent.slice(0,-1); }
+  else if(k==='↵'){
+    if(wCurrent.length!==wWord.length) return;
+    const colors=[];
+    const rem=[...wWord];
+    for(let i=0;i<wWord.length;i++){ if(wCurrent[i]===wWord[i]){ colors[i]='correct'; rem[i]=null; } }
+    for(let i=0;i<wWord.length;i++){ if(colors[i]) continue; const j=rem.indexOf(wCurrent[i]); if(j>=0){ colors[i]='present'; rem[j]=null; } else colors[i]='absent'; }
+    const g=[...wCurrent]; g.colors=colors;
+    wGuesses.push(g);
+    const won=colors.every(c=>c==='correct');
+    if(won||wGuesses.length>=6){ wDone=true; renderWordle(); document.getElementById('wMsg').textContent=won?`🎉 ¡Correcto! La palabra era ${wWord}`:`😔 Era: ${wWord}`; return; }
+    wCurrent='';
+  } else if(wCurrent.length<wWord.length && k.length===1){ wCurrent+=k; }
+  renderWordle();
+}
+</script>
+</body>
+</html>
