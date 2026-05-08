@@ -850,14 +850,17 @@ function submitTriviaScore(){
           <button class="btn-primary" onclick="renderTriviaEnd()">Intentar de nuevo</button>
         </div>`;
     } else {
-      setTimeout(() => showLeaderboard(), 500);
+      document.getElementById('triviaContent').innerHTML=`<div style="text-align:center;padding:20px 0;font-size:14px;color:var(--muted);">Score guardado ✓ Cargando tablero...</div>`;
+      setTimeout(() => showLeaderboard(), 800);
     }
   });
 }
 
 function showLeaderboard(){
   document.getElementById('triviaContent').innerHTML=`<div style="text-align:center;padding:20px 0;font-size:14px;color:var(--muted);">Cargando tablero...</div>`;
-  firebase.database().ref('trivia_scores').orderByChild('score').once('value', snap => {
+  const ref = firebase.database().ref('trivia_scores');
+  ref.keepSynced(true);
+  ref.once('value', snap => {
     const entries = [];
     snap.forEach(child => entries.push(child.val()));
     entries.sort((a,b) => b.score - a.score || a.date - b.date);
