@@ -858,9 +858,7 @@ function submitTriviaScore(){
 
 function showLeaderboard(){
   document.getElementById('triviaContent').innerHTML=`<div style="text-align:center;padding:20px 0;font-size:14px;color:var(--muted);">Cargando tablero...</div>`;
-  const ref = firebase.database().ref('trivia_scores');
-  ref.keepSynced(true);
-  ref.once('value', snap => {
+  firebase.database().ref('trivia_scores').get().then(snap => {
     const entries = [];
     snap.forEach(child => entries.push(child.val()));
     entries.sort((a,b) => b.score - a.score || a.date - b.date);
@@ -885,6 +883,13 @@ function showLeaderboard(){
           <button class="btn-primary" onclick="openTrivia()">Jugar de nuevo</button>
           <button onclick="closeTrivia()" style="font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:var(--sans);">Cerrar</button>
         </div>
+      </div>`;
+  }).catch(err => {
+    document.getElementById('triviaContent').innerHTML=`
+      <div style="text-align:center;padding:20px 0;">
+        <div style="font-size:14px;color:#dc2626;margin-bottom:8px;">Error al cargar el tablero.</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">${err.message}</div>
+        <button class="btn-primary" onclick="showLeaderboard()">Reintentar</button>
       </div>`;
   });
 }
