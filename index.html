@@ -842,15 +842,17 @@ function submitTriviaScore(){
   if(!name) { document.getElementById('tName').style.borderColor='#dc2626'; return; }
   tMyName = name;
   document.getElementById('triviaContent').innerHTML=`<div style="text-align:center;padding:20px 0;font-size:14px;color:var(--muted);">Guardando tu score...</div>`;
-  firebase.database().ref('trivia_scores').push({ name, score: tScore, date: Date.now() })
-    .then(() => showLeaderboard())
-    .catch(err => {
+  firebase.database().ref('trivia_scores').push({ name, score: tScore, date: Date.now() }, function(error){
+    if(error){
       document.getElementById('triviaContent').innerHTML=`
         <div style="text-align:center;padding:20px 0;">
           <div style="font-size:14px;color:#dc2626;margin-bottom:16px;">No se pudo guardar tu score. Revisa tu conexión.</div>
           <button class="btn-primary" onclick="renderTriviaEnd()">Intentar de nuevo</button>
         </div>`;
-    });
+    } else {
+      setTimeout(() => showLeaderboard(), 500);
+    }
+  });
 }
 
 function showLeaderboard(){
