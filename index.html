@@ -156,19 +156,19 @@
     .pick-body-why    { font-size: 11px; font-weight: 300; color: var(--muted); line-height: 1.5; font-style: italic; }
 
     /* ── PART 2: AI BOOK RECOMMENDER ── */
-    #que-leer { padding: 72px 52px; border-bottom: 1px solid var(--border); background: var(--bg2); }
-    .rec-layout { display: grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: start; }
-    .rec-intro h2 { font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 12px; }
-    .rec-intro p { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
-    .rec-form { display: flex; flex-direction: column; gap: 14px; }
-    .rec-form label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; display: block; }
-    .rec-input { width: 100%; background: var(--white); border: 1.5px solid var(--border); border-radius: 8px; padding: 12px 16px; font-family: var(--sans); font-size: 14px; color: var(--ink); outline: none; transition: border-color 0.2s; }
+    #que-leer { padding: 80px 52px; border-bottom: 1px solid var(--border); background: var(--bg2); }
+    .rec-layout { display: grid; grid-template-columns: 420px 1fr; gap: 64px; align-items: start; }
+    .rec-intro h2 { font-family: var(--serif); font-size: clamp(28px,3vw,38px); font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 16px; }
+    .rec-intro p { font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
+    .rec-form { display: flex; flex-direction: column; gap: 18px; }
+    .rec-form label { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: block; }
+    .rec-input { width: 100%; background: var(--white); border: 1.5px solid var(--border); border-radius: 10px; padding: 14px 18px; font-family: var(--sans); font-size: 16px; color: var(--ink); outline: none; transition: border-color 0.2s; }
     .rec-input:focus { border-color: var(--lavanda); }
     .rec-input::placeholder { color: var(--muted); }
     .rec-genres { display: flex; flex-wrap: wrap; gap: 8px; }
-    .genre-btn { font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: var(--sans); }
+    .genre-btn { font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--white); color: var(--muted); cursor: pointer; transition: all 0.2s; font-family: var(--sans); }
     .genre-btn.active { color: var(--lavanda); border-color: var(--lavanda); background: var(--lav-lt); }
-    .rec-btn { width: 100%; padding: 14px; background: var(--blue); color: white; border: none; border-radius: 8px; font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .rec-btn { width: 100%; padding: 16px; background: var(--blue); color: white; border: none; border-radius: 10px; font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .rec-btn:hover { background: var(--lavanda); }
     .rec-btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .rec-results { display: flex; flex-direction: column; gap: 16px; }
@@ -405,8 +405,8 @@
   <div class="rec-layout">
     <div class="rec-intro">
       <span class="section-label">¿Qué debo leer?</span>
-      <h2>Tu próxima lectura favorita, encontrada por IA</h2>
-      <p>Dime un libro que te haya gustado y yo te sugiero 3 lecturas similares. Cuéntame también qué géneros te interesan para afinar las recomendaciones.</p>
+      <h2>¿No sabes qué leer después? Yo te ayudo</h2>
+      <p>Pasa, te entiendo. Dime qué libro o autor te gustó y te recomiendo algo similar.</p>
       <div class="rec-form">
         <div>
           <label>Un libro que te gustó</label>
@@ -426,7 +426,7 @@
           </div>
         </div>
         <button class="rec-btn" id="recBtn" onclick="getRecommendations()">
-          <span id="recBtnText">✨ Recomiéndame algo</span>
+          <span id="recBtnText">✨ Encontrar mi próximo libro</span>
         </button>
       </div>
     </div>
