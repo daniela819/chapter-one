@@ -723,23 +723,14 @@ async function getRecommendations() {
   document.getElementById('recBtnText').textContent = 'Buscando...';
   document.getElementById('recResults').innerHTML = `<div class="rec-loading"><div class="rec-spinner"></div><p>Buscando recomendaciones para fans de "${book}"...</p></div>`;
 
-  const prompt = `Eres una lectora apasionada y experta en literatura. Una persona leyó "${book}"${genres ? ` y le interesan géneros como: ${genres}` : ''} y quiere saber qué leer a continuación.
-
-Recomienda exactamente 3 libros similares. Responde ÚNICAMENTE en JSON válido, sin texto extra, sin markdown, sin backticks. Formato:
-[{"title":"...","author":"...","why":"Una oración corta y específica de por qué le va a gustar si disfrutó ${book}","color":"#xxxxxx"}]
-
-Los colores deben ser colores bonitos tipo #1A47B8 o #7B74D4 o similares, uno diferente por libro. Why debe ser conversacional y entusiasta, máximo 20 palabras.`;
-
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('/api/recommend', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:1000, messages:[{role:'user',content:prompt}] })
+      body: JSON.stringify({ book, genres })
     });
-    const data = await res.json();
-    const text = data.content.find(c=>c.type==='text')?.text || '[]';
-    const clean = text.replace(/```json|```/g,'').trim();
-    const recs = JSON.parse(clean);
+    const recs = await res.json();
+    if(!res.ok) throw new Error(recs.error);
     renderRecs(recs, book);
   } catch(e) {
     document.getElementById('recResults').innerHTML = `<div class="rec-placeholder"><div class="rec-placeholder-icon">😔</div><p>Algo salió mal. Intenta de nuevo en un momento.</p></div>`;
