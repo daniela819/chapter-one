@@ -409,11 +409,12 @@
       <p>Pasa, te entiendo. Dime qué libro o autor te gustó y te recomiendo algo similar.</p>
       <div class="rec-form">
         <div>
-          <label>Un libro que te gustó</label>
-          <input class="rec-input" id="recBook" placeholder="Ej: Pachinko, Intermezzo, Las Muertas...">
+          <label>Un libro que te gustó o un autor</label>
+          <input class="rec-input" id="recBook" placeholder="">
         </div>
         <div>
-          <label>¿Qué te interesa? (opcional)</label>
+          <label>¿Qué te interesa?</label>
+          <p style="font-size:12px;font-weight:300;color:var(--muted);margin-bottom:10px;line-height:1.5;">Opcional, pero si escoges algo las recomendaciones se afinarán más.</p>
           <div class="rec-genres" id="recGenres">
             <button class="genre-btn" onclick="toggleGenre(this)">Romance</button>
             <button class="genre-btn" onclick="toggleGenre(this)">Thriller</button>
