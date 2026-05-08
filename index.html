@@ -876,9 +876,9 @@ function wordleKey(k){
 
 document.addEventListener('keydown', function(e){
   if(!document.getElementById('wordleModal').classList.contains('open')) return;
-  if(e.key === 'Enter') wordleKey('↵');
-  else if(e.key === 'Backspace') wordleKey('⌫');
-  else if(e.key.length === 1 && /[a-záéíóúüñA-ZÁÉÍÓÚÜÑ]/.test(e.key)) wordleKey(e.key.toUpperCase());
+  if(e.key === 'Enter'){ e.preventDefault(); wordleKey('↵'); }
+  else if(e.key === 'Backspace'){ e.preventDefault(); wordleKey('⌫'); }
+  else if(e.key.length === 1 && /[a-záéíóúüñA-ZÁÉÍÓÚÜÑ]/.test(e.key)){ e.preventDefault(); wordleKey(e.key.toUpperCase()); }
 });
 </script>
 </body>
