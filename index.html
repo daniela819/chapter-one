@@ -138,18 +138,14 @@
     .picks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
     .pick-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
     .pick-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,26,46,0.1); }
-    .pick-cover { height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; text-align: center; position: relative; }
-    .pick-cover::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; }
-    .pick-cover-num { font-family: var(--serif); font-size: 32px; font-weight: 600; opacity: 0.2; line-height: 1; margin-bottom: 6px; }
-    .pick-cover-title { font-size: 12px; font-weight: 700; line-height: 1.3; }
-    .pick-cover-author { font-size: 10px; font-weight: 300; margin-top: 4px; opacity: 0.7; }
-    .pc1 { background: var(--blue-lt); color: var(--blue); } .pc1::before { background: var(--blue); }
-    .pc2 { background: var(--lav-lt);  color: var(--lavanda); } .pc2::before { background: var(--lavanda); }
-    .pc3 { background: #f0fdf4; color: #059669; } .pc3::before { background: #059669; }
-    .pc4 { background: #fef9ee; color: #d97706; } .pc4::before { background: #d97706; }
-    .pc5 { background: #fdf2f8; color: #db2777; } .pc5::before { background: #db2777; }
-    .pc6 { background: #f0fdfa; color: #0d9488; } .pc6::before { background: #0d9488; }
-    .pc7 { background: #fff1f2; color: #e11d48; } .pc7::before { background: #e11d48; }
+    .pick-cover { height: 200px; background-size: cover; background-position: center; position: relative; }
+    .pc1 { background-color: var(--blue-lt); background-image: url('Zoo.jpg'); }
+    .pc2 { background-color: var(--lav-lt);  background-image: url('Verity.jpg'); }
+    .pc3 { background-color: #f0fdf4;        background-image: url('PersonaNormal.jpg'); }
+    .pc4 { background-color: #fef9ee;        background-image: url("Can'thurtme.jpg"); }
+    .pc5 { background-color: #fdf2f8;        background-image: url('Thebig.jpg'); }
+    .pc6 { background-color: #f0fdfa;        background-image: url('Nada.jpg'); }
+    .pc7 { background-color: #fff1f2;        background-image: url('HarryQuebert.jpg'); }
     .pick-body { padding: 14px 16px; border-top: 1px solid var(--border); }
     .pick-body-title  { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 2px; line-height: 1.3; }
     .pick-body-author { font-size: 11px; font-weight: 400; color: var(--lavanda); margin-bottom: 4px; }
@@ -390,13 +386,13 @@
     </div>
   </div>
   <div class="picks-grid">
-    <div class="pick-card"><div class="pick-cover pc1"><div class="pick-cover-num">01</div><div class="pick-cover-title">La muy catastrófica visita al zoo</div><div class="pick-cover-author">Joël Dicker</div></div><div class="pick-body"><div class="pick-body-title">La muy catastrófica visita al zoo</div><div class="pick-body-author">Joël Dicker</div><div class="pick-body-why">Dicker en modo absurdo y tierno. Inesperado.</div></div></div>
-    <div class="pick-card"><div class="pick-cover pc2"><div class="pick-cover-num">02</div><div class="pick-cover-title">Verity</div><div class="pick-cover-author">Colleen Hoover</div></div><div class="pick-body"><div class="pick-body-title">Verity</div><div class="pick-body-author">Colleen Hoover</div><div class="pick-body-why">Un giro que no te deja dormir.</div></div></div>
-    <div class="pick-card"><div class="pick-cover pc3"><div class="pick-cover-num">03</div><div class="pick-cover-title">Persona Normal</div><div class="pick-cover-author">Benito Taibo</div></div><div class="pick-body"><div class="pick-body-title">Persona Normal</div><div class="pick-body-author">Benito Taibo</div><div class="pick-body-why">Sobre crecer, leer y sobrevivir.</div></div></div>
-    <div class="pick-card"><div class="pick-cover pc4"><div class="pick-cover-num">04</div><div class="pick-cover-title">Can't Hurt Me</div><div class="pick-cover-author">David Goggins</div></div><div class="pick-body"><div class="pick-body-title">Can't Hurt Me</div><div class="pick-body-author">David Goggins</div><div class="pick-body-why">Para los días que necesitas que alguien te sacuda.</div></div></div>
-    <div class="pick-card"><div class="pick-cover pc5"><div class="pick-cover-num">05</div><div class="pick-cover-title">The Magic of Thinking Big</div><div class="pick-cover-author">David J. Schwartz</div></div><div class="pick-body"><div class="pick-body-title">The Magic of Thinking Big</div><div class="pick-body-author">David J. Schwartz</div><div class="pick-body-why">Cambia cómo te hablas a ti mismo.</div></div></div>
-    <div class="pick-card"><div class="pick-cover pc6"><div class="pick-cover-num">06</div><div class="pick-cover-title">Nada</div><div class="pick-cover-author">Janne Teller</div></div><div class="pick-body"><div class="pick-body-title">Nada</div><div class="pick-body-author">Janne Teller</div><div class="pick-body-why">Adelantada a su tiempo. Asfixiante y brillante.</div></div></div>
-    <div class="pick-card"><div class="pick-cover pc7"><div class="pick-cover-num">07</div><div class="pick-cover-title">La verdad sobre el caso Harry Quebert</div><div class="pick-cover-author">Joël Dicker</div></div><div class="pick-body"><div class="pick-body-title">La verdad sobre el caso Harry Quebert</div><div class="pick-body-author">Joël Dicker</div><div class="pick-body-why">El thriller que no puedes soltar.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc1"></div><div class="pick-body"><div class="pick-body-title">La muy catastrófica visita al zoo</div><div class="pick-body-author">Joël Dicker</div><div class="pick-body-why">Dicker en modo absurdo y tierno. Inesperado.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc2"></div><div class="pick-body"><div class="pick-body-title">Verity</div><div class="pick-body-author">Colleen Hoover</div><div class="pick-body-why">Un giro que no te deja dormir.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc3"></div><div class="pick-body"><div class="pick-body-title">Persona Normal</div><div class="pick-body-author">Benito Taibo</div><div class="pick-body-why">Sobre crecer, leer y sobrevivir.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc4"></div><div class="pick-body"><div class="pick-body-title">Can't Hurt Me</div><div class="pick-body-author">David Goggins</div><div class="pick-body-why">Para los días que necesitas que alguien te sacuda.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc5"></div><div class="pick-body"><div class="pick-body-title">The Magic of Thinking Big</div><div class="pick-body-author">David J. Schwartz</div><div class="pick-body-why">Cambia cómo te hablas a ti mismo.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc6"></div><div class="pick-body"><div class="pick-body-title">Nada</div><div class="pick-body-author">Janne Teller</div><div class="pick-body-why">Adelantada a su tiempo. Asfixiante y brillante.</div></div></div>
+    <div class="pick-card"><div class="pick-cover pc7"></div><div class="pick-body"><div class="pick-body-title">La verdad sobre el caso Harry Quebert</div><div class="pick-body-author">Joël Dicker</div><div class="pick-body-why">El thriller que no puedes soltar.</div></div></div>
   </div>
 </section>
 
@@ -551,12 +547,13 @@
 
 <!-- TIP JAR -->
 <section id="tips">
-  <h3>☕ ¿Te gustó el contenido?</h3>
-  <p>Si mis reseñas te ayudaron a encontrar tu próxima lectura favorita, puedes invitarme un café.</p>
+  <h3>¿Te gustó el contenido?</h3>
+  <p>Si mi página te gustó, te ayudó o te divirtió, puedes invitarme un café.</p>
   <div class="tip-buttons">
-    <a href="https://buymeacoffee.com" target="_blank" class="tip-btn tip-bmc">☕ Buy Me a Coffee</a>
+    <div id="kofi-btn"></div>
     <a href="https://paypal.me" target="_blank" class="tip-btn tip-pp">PayPal</a>
   </div>
+  <p style="margin-top:24px;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">Gracias por leer.</p>
 </section>
 
 <!-- FOOTER -->
@@ -570,7 +567,7 @@
   </div>
   <div class="footer-col"><h4>Contenido</h4><ul><li><a href="#blog">Blog</a></li><li><a href="#libreria">Librería</a></li><li><a href="#picks">Mis picks</a></li><li><a href="#que-leer">¿Qué leer?</a></li></ul></div>
   <div class="footer-col"><h4>Extras</h4><ul><li><a href="#juegos">Juegos</a></li><li><a href="#club">El club</a></li><li><a href="#">Entre Páginas</a></li><li><a href="/shop">Shop</a></li></ul></div>
-  <div class="footer-col"><h4>Apóyame</h4><ul><li><a href="https://buymeacoffee.com" target="_blank">Buy Me a Coffee</a></li><li><a href="https://paypal.me" target="_blank">PayPal</a></li><li><a href="#">Instagram</a></li><li><a href="#">Contacto</a></li></ul></div>
+  <div class="footer-col"><h4>Apóyame</h4><ul><li><a href="https://ko-fi.com/Q5Q41Z71PE" target="_blank">Ko-fi</a></li><li><a href="https://paypal.me" target="_blank">PayPal</a></li><li><a href="#">Instagram</a></li><li><a href="#">Contacto</a></li></ul></div>
 </footer>
 <div class="footer-bottom">
   <p>© 2025 chapter one. Todos los derechos reservados.</p>
@@ -606,7 +603,7 @@ const books = [
   { id:11, title:'Cadáver Exquisito',                        author:'Agustina Bazterrica',    year:'2025', cls:'bc11', desc:'Distopía sobre el canibalismo como metáfora del consumismo. Brillante e incómoda.', rating:4 },
   { id:12, title:'La vida invisible de Addie LaRue',         author:'V.E. Schwab',            year:'2025', cls:'bc12', desc:'Una mujer que hizo un pacto para vivir libre pero nadie puede recordarla.', rating:4 },
   { id:13, title:'Intermezzo',                               author:'Sally Rooney',           year:'2025', cls:'bc13', desc:'Sally Rooney en su versión más madura.', rating:3 },
-  { id:14, title:'Persona Normal',                           author:'Benito Taibo',           year:'2025', cls:'bc14', desc:'Una historia sobre crecer, leer y sobrevivir.', rating:4 },
+  { id:14, title:'Persona Normal',                           author:'Benito Taibo',           year:'2025', cls:'bc14', cover:'PersonaNormal.jpg', desc:'Una historia sobre crecer, leer y sobrevivir.', rating:4 },
   { id:15, title:'Pachinko',                                 author:'Min Jin Lee',            year:'2025', cls:'bc1',  desc:'Cuatro generaciones de una familia coreana. Identidad, sacrificio y lo que heredamos sin pedirlo.', rating:5 },
   { id:16, title:'El amor que dejamos atrás',                author:'',                       year:'2025', cls:'bc2',  desc:'Una historia sobre las personas que fuimos y las que decidimos no seguir siendo.', rating:3 },
   { id:17, title:'Siddharta',                                author:'Hermann Hesse',          year:'2025', cls:'bc3',  desc:'Se lee en pocas horas pero se digiere durante semanas.', rating:4 },
@@ -662,7 +659,7 @@ const books = [
   { id:63, title:'Una educación',                            author:'Tara Westover',          year:'2021', cls:'bc11', desc:'Memorias demoledoras sobre crecer sin educación formal. Imprescindible.', rating:5 },
   { id:64, title:'El último invitado',                       author:'Megan Miranda',          year:'2021', cls:'bc12', desc:'Thriller de casa de campo muy adictivo.', rating:4 },
   { id:65, title:'El guardián entre el centeno',             author:'J.D. Salinger',          year:'2021', cls:'bc13', desc:'El clásico de todos los tiempos. Sigue siendo relevante.', rating:4 },
-  { id:66, title:'La verdad sobre el caso Harry Quebert',    author:'Joël Dicker',            year:'2021', cls:'bc14', desc:'El thriller que no puedes soltar. El inicio del amor por Dicker.', rating:5 },
+  { id:66, title:'La verdad sobre el caso Harry Quebert',    author:'Joël Dicker',            year:'2021', cls:'bc14', cover:'HarryQuebert.jpg', desc:'El thriller que no puedes soltar. El inicio del amor por Dicker.', rating:5 },
 ];
 
 function starHTML(n) {
@@ -676,9 +673,8 @@ function renderBooks(filter) {
   const grid = document.getElementById('booksGrid');
   grid.innerHTML = filtered.map(b=>`
     <div class="book-card" onclick="openBookModal(${b.id})">
-      <div class="book-card-cover ${b.cls}">
-        <div class="book-card-cover-title">${b.title}</div>
-        <div class="book-card-cover-author">${b.author}</div>
+      <div class="book-card-cover ${b.cls}" style="${b.cover ? `background-image:url('${b.cover}');background-size:cover;background-position:center;` : ''}">
+        ${b.cover ? '' : `<div class="book-card-cover-title">${b.title}</div><div class="book-card-cover-author">${b.author}</div>`}
       </div>
       <div class="book-card-year">${b.year}</div>
       <div class="book-card-title">${b.title}</div>
@@ -990,5 +986,7 @@ document.addEventListener('keydown', function(e){
   else if(e.key.length === 1 && /[a-záéíóúüñA-ZÁÉÍÓÚÜÑ]/.test(e.key)){ e.preventDefault(); wordleKey(e.key.toUpperCase()); }
 });
 </script>
+<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+<script type='text/javascript'>kofiwidget2.init('Invítame un café', '#1a47b8', 'Q5Q41Z71PE');kofiwidget2.draw('kofi-btn');</script>
 </body>
 </html>
