@@ -444,8 +444,8 @@
   <div class="library-header">
     <span class="section-label" style="margin-bottom:0">Libros leídos en Bookclub Chapter One</span>
     <div class="library-filters">
-      <button class="filter-btn active" onclick="filterBooks('all',this)">Todos</button>
-      <button class="filter-btn" onclick="filterBooks('2026',this)">2026</button>
+      <button class="filter-btn" onclick="filterBooks('all',this)">Todos</button>
+      <button class="filter-btn active" onclick="filterBooks('2026',this)">2026</button>
       <button class="filter-btn" onclick="filterBooks('2025',this)">2025</button>
       <button class="filter-btn" onclick="filterBooks('2024',this)">2024</button>
       <button class="filter-btn" onclick="filterBooks('2023',this)">2023</button>
@@ -695,7 +695,7 @@ function openBookModal(id) {
 function closeBookModal(e){ if(e.target===document.getElementById('bookModal')) closeBookModalBtn(); }
 function closeBookModalBtn(){ document.getElementById('bookModal').classList.remove('open'); document.body.style.overflow=''; }
 
-renderBooks('all');
+renderBooks('2026');
 
 // ── AI RECOMMENDATIONS ──
 function toggleGenre(btn){ btn.classList.toggle('active'); }
