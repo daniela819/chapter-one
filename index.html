@@ -852,7 +852,7 @@ function showLeaderboard(){
     snap.forEach(child => entries.push(child.val()));
     entries.sort((a,b) => b.score - a.score || a.date - b.date);
     const medals = ['🥇','🥈','🥉'];
-    const rows = entries.slice(0,15).map((e,i) => `
+    const rows = entries.map((e,i) => `
       <div style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
         <span style="font-size:${i<3?'20px':'13px'};text-align:center;">${i<3?medals[i]:i+1}</span>
         <span style="font-size:14px;font-weight:600;color:var(--ink);">${e.name}</span>
@@ -861,8 +861,10 @@ function showLeaderboard(){
     document.getElementById('triviaContent').innerHTML=`
       <div style="padding:8px 0;">
         <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);margin-bottom:4px;">Tablero de honor</div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Los mejores lectores del club</div>
-        ${rows || '<div style="font-size:14px;color:var(--muted);padding:20px 0;">Sé el primero en el tablero.</div>'}
+        <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">${entries.length} jugador${entries.length!==1?'es':''} · Los mejores del club</div>
+        <div style="max-height:300px;overflow-y:auto;">
+          ${rows || '<div style="font-size:14px;color:var(--muted);padding:20px 0;">Sé el primero en el tablero.</div>'}
+        </div>
         <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;">
           <button class="btn-primary" onclick="openTrivia()">Jugar de nuevo</button>
           <button onclick="closeTrivia()" style="font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:var(--sans);">Cerrar</button>
