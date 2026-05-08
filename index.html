@@ -521,7 +521,7 @@
 </div>
 
 <!-- WORDLE MODAL -->
-<div class="game-modal-overlay" id="wordleModal" onclick="closeWordleOutside(event)">
+<div class="game-modal-overlay" id="wordleModal" tabindex="-1" onclick="closeWordleOutside(event)">
   <div class="game-modal">
     <button class="game-modal-close" onclick="closeWordle()">✕</button>
     <div id="wordleContent"></div>
@@ -821,7 +821,7 @@ function openWordle(){
   wGuesses=[]; wCurrent=''; wDone=false;
   document.getElementById('wordleModal').classList.add('open');
   document.body.style.overflow='hidden';
-  if(document.activeElement) document.activeElement.blur();
+  document.getElementById('wordleModal').focus();
   renderWordle();
 }
 function closeWordle(){ document.getElementById('wordleModal').classList.remove('open'); document.body.style.overflow=''; }
