@@ -97,6 +97,7 @@
 </div>
 
 <div class="shop-body">
+  <p id="shop-loading" style="font-size:13px;color:var(--muted);padding:40px 0;">Cargando productos...</p>
   <div id='collection-component-1778208464993'></div>
   <script type="text/javascript">
   /*<![CDATA[*/
@@ -124,6 +125,7 @@
         storefrontAccessToken: '51a679b1731170ccd0cece9f6d2b10d8',
       });
       ShopifyBuy.UI.onReady(client).then(function (ui) {
+        document.getElementById('shop-loading').style.display = 'none';
         ui.createComponent('collection', {
           id: '419812606160',
           node: document.getElementById('collection-component-1778208464993'),
