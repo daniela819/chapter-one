@@ -289,6 +289,22 @@
       footer { grid-template-columns: 1fr 1fr; } .footer-col { padding: 28px 20px; }
       .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 6px; text-align: center; }
     }
+  /* BLOG MODAL */
+  .blog-modal-overlay { display:none; position:fixed; inset:0; background:rgba(22,22,42,0.55); z-index:500; overflow-y:auto; padding:40px 20px; }
+  .blog-modal-overlay.open { display:flex; align-items:flex-start; justify-content:center; }
+  .blog-modal-box { background:var(--white); max-width:680px; width:100%; border-radius:14px; padding:52px 56px; position:relative; margin:auto; }
+  .blog-modal-close { position:absolute; top:18px; right:22px; background:none; border:none; font-size:22px; cursor:pointer; color:var(--muted); line-height:1; }
+  .blog-modal-close:hover { color:var(--ink); }
+  .blog-post-date { font-size:10px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:var(--lavanda); display:block; margin-bottom:14px; }
+  .blog-post-h1 { font-family:var(--serif); font-size:clamp(22px,3vw,30px); font-weight:600; color:var(--ink); line-height:1.25; margin-bottom:28px; }
+  .blog-post-body { font-size:15px; line-height:1.85; color:var(--ink); }
+  .blog-post-body p { margin-bottom:18px; }
+  .blog-post-body em { font-style:italic; }
+  .blog-post-body strong { font-weight:600; }
+  .blog-post-divider { border:none; border-top:1px solid var(--border); margin:28px 0; }
+  .blog-post-cta { text-align:center; padding-top:8px; }
+  .blog-post-cta p { font-size:13px; color:var(--muted); margin-bottom:14px; }
+  @media (max-width:640px) { .blog-modal-box { padding:36px 24px; } }
   </style>
 </head>
 <body>
@@ -364,9 +380,9 @@
       <span class="blog-row-title">Lo que cinco años de book club me enseñaron sobre escuchar</span>
       <span class="blog-row-arrow">→</span>
     </a>
-    <a href="#" class="blog-row">
-      <span class="tag tag-lav">Mayo 2026</span>
-      <span class="blog-row-title">Próximamente: nueva entrada del blog</span>
+    <a href="#" onclick="openBlogPost('abril-2026'); return false;" class="blog-row">
+      <span class="tag tag-lav">Abril 2026</span>
+      <span class="blog-row-title">Abril: libros pésimos y calor en Mty 📚</span>
       <span class="blog-row-arrow">→</span>
     </a>
   </div>
@@ -985,6 +1001,64 @@ document.addEventListener('keydown', function(e){
   else if(e.key.length === 1 && /[a-záéíóúüñA-ZÁÉÍÓÚÜÑ]/.test(e.key)){ e.preventDefault(); wordleKey(e.key.toUpperCase()); }
 });
 </script>
+<!-- BLOG MODAL -->
+<div id="blog-modal" class="blog-modal-overlay" onclick="closeBlogModal(event)">
+  <div class="blog-modal-box">
+    <button class="blog-modal-close" onclick="closeBlogModal()">✕</button>
+    <div id="blog-modal-content"></div>
+  </div>
+</div>
+
+<script>
+var blogPosts = {
+  'abril-2026': `
+    <span class="blog-post-date">Abril 2026</span>
+    <h1 class="blog-post-h1">Abril: libros pésimos y calor en Mty 📚</h1>
+    <div class="blog-post-body">
+      <p>Hola,</p>
+      <p>Te escribo desde mi escritorio. Me hace falta un cuadro porque mi vista es una pared. Este abril cumplió años mi papá, vino una amiga a Mty, supe el género del bebé de otra amiga y empezó el calorcito. Y yo, escogiendo los pésimos libros del mes. No fue un mes agradable de lectura, pero como quiera leímos.</p>
+      <p>Aquí va lo que leí:</p>
+      <p>Empecé con <em>Todos somos villanos</em> de M.L. Rio. La sufrí mucho. Luego dicen que hay libros que no conectamos en el momento, ese fue uno. No entendía qué quería transmitir el autor. El libro trataba de un grupo de actores, pelea de personajes, luego se iban a un lago y no sé, practicaban escenas pero no hubo trama, no pasaba nada. Lo terminé porque tenía que.</p>
+      <p>Seguí leyendo <em>Hello Beautiful</em>. Me lo recomendó Clari. Total, otro libro igualito que leí el mes pasado: <em>Blue Sisters</em> de Coco Mellors. Y súper curioso, también trataba de 4 hermanas. Luego a veces me sucede que leo un libro y el siguiente, sin querer, habla también algo del anterior. En fin, <em>Hello Beautiful</em> me gustó más que <em>Blue Sisters</em>. Sigo sin entender el nombre del libro, pero bueno, un libro no corto. Pero también de 4 hermanas, cada quien con sus problemas. Secretos.</p>
+      <p>Luego me puse a reflexionar sobre los secretos. ¿Es mejor guardarlos o decir la verdad? ¿Le dices a tu hija que su papá las abandonó y se casó con su tía? ¿Cómo manejarías esa situación? Me gustó ese tipo de dilemas porque cada personaje está construido con un análisis y te das cuenta de que no todos reaccionamos igual.</p>
+      <p>Bueno, luego leí <em>El método de Elisa</em> de Mamen de Blas. Está como cozy, para pasar el rato. Es un libro corto. La protagonista se creía escritora y se disfrazaba de sus autoras favoritas, porque dice que si uno quiere ser alguien, hay que disfrazarse o actuar como ellos para lograrlo (y sí, sí lo creo).</p>
+      <p>Seguí con <em>Un apartamento en París</em> de Lucy Foley. Este fue el libro del mes del bookclub, Chapter One. Me gustó, pero hmm, llegó un punto en que la autora no supo desarrollar la trama o tenía prisa por terminarlo porque al final solo empezó a sacar cosas que ni al caso. Pero para no spoilear, me gustaron mucho 2 temas que se pudieron desarrollar muy bien, pero lamentablemente no me gustó cómo se desarrolló la historia.</p>
+      <p>Terminamos con <em>Someone Like Us</em> de Dinaw Mengestu. Me lo prestó Andrés. Me sacó de lo que he leído últimamente. Hace mucho que no leía un libro de ese estilo. Inmigración. Familia africana, Etiopía. Migran a Chicago y pues es como la narración de cómo viven siendo inmigrantes. El racismo, la autoridad, la identidad... todo eso está ahí, pero contado de una forma muy íntima. No es un libro que te grite las cosas, te las va soltando en conversaciones cotidianas, flashbacks, acciones que tenías que ir descifrando. Hasta el momento no sé si entendí varias cosas. Me hizo pensar en cómo la experiencia migrante no es solo mudarse de país, sino cargar con un peso invisible que moldea cada decisión, y más si eres negro en Estados Unidos. Es corto, pero te deja pensando días.</p>
+      <p>Y esto fue de libros.</p>
+      <hr class="blog-post-divider">
+      <p>También fui a conocer una nueva librería que acaban de abrir, se llama OfflineBooks. La verdad en redes sociales se veía top. Y, sí, está bonito: el mueble céntrico es llamativo, alto, tipo caracol. Solamente venden libros en inglés, no hay internet (ultra top) y puedes ir a leer y tomar un cafecito. Pero sí tenía muchas expectativas sobre el lugar, y la realidad estuvo un poco por debajo.</p>
+      <hr class="blog-post-divider">
+      <p>Y bueno, este fue mi mes. Espero que mayo venga mejor.</p>
+      <p>Empezaré a leer <em>El voluntario</em> de Jack Fairweather. Este libro lo saqué de <em>Todo está jdido*</em> de Mark Manson, donde Mark empieza a hablar de la resistencia y menciona a Witold, un polaco que se infiltra en los campos de concentración. Y justo este libro, <em>El voluntario</em>, es su historia. Ya les contaré.</p>
+      <p>Por el momento solo tengo este libro para leer y el del bookclub, que será <em>El retrato de casada</em>. Con ver la portada me aburre. Esperemos que no.</p>
+      <hr class="blog-post-divider">
+      <div class="blog-post-cta">
+        <p>¿Te gustó lo que leí? Si quieres invitarme un café para que siga leyendo y compartiendo:</p>
+        <button onclick="openKofi()" class="tip-btn tip-kofi">☕ ¿Un cafecito?</button>
+        <p style="margin-top:16px;font-size:13px;color:var(--muted)">GRACIAS POR LEER 🤍</p>
+      </div>
+    </div>
+  `
+};
+
+function openBlogPost(id) {
+  document.getElementById('blog-modal-content').innerHTML = blogPosts[id];
+  document.getElementById('blog-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBlogModal(e) {
+  if (!e || e.target === document.getElementById('blog-modal')) {
+    document.getElementById('blog-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeBlogModal();
+});
+</script>
+
 <script>
 function openKofi() {
   var w = 500, h = 720;
