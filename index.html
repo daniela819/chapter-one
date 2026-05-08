@@ -743,15 +743,18 @@ async function getRecommendations() {
 async function fetchCover(title, author, idx) {
   try {
     const q = encodeURIComponent(`${title} ${author}`);
-    const res = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=1&fields=cover_i`);
+    const res = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=1&fields=cover_i,title`);
     const data = await res.json();
-    const coverId = data.docs?.[0]?.cover_i;
-    if (!coverId) return;
-    const img = document.getElementById(`cover-${idx}`);
-    if (!img) return;
-    const url = `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`;
-    img.src = url;
-    img.style.display = 'block';
+    const doc = data.docs?.[0];
+    const coverId = doc?.cover_i;
+    if (coverId) {
+      const img = document.getElementById(`cover-${idx}`);
+      if (img) { img.src = `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`; img.style.display = 'block'; }
+    }
+    if (!doc) {
+      const warning = document.getElementById(`warning-${idx}`);
+      if (warning) warning.style.display = 'block';
+    }
   } catch {}
 }
 
@@ -767,6 +770,7 @@ function renderRecs(recs, book, genres) {
         </div>
         <div>
           <div class="rec-book-title">${r.title}</div>
+          <div id="warning-${i}" style="display:none;font-size:10px;color:#e07b39;font-weight:600;margin-bottom:4px;">⚠️ Verifica el título antes de buscarlo</div>
           <div class="rec-book-author">${r.author}</div>
           <div class="rec-book-why">${r.why}</div>
         </div>
