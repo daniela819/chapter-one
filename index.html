@@ -821,6 +821,7 @@ function openWordle(){
   wGuesses=[]; wCurrent=''; wDone=false;
   document.getElementById('wordleModal').classList.add('open');
   document.body.style.overflow='hidden';
+  if(document.activeElement) document.activeElement.blur();
   renderWordle();
 }
 function closeWordle(){ document.getElementById('wordleModal').classList.remove('open'); document.body.style.overflow=''; }
