@@ -258,8 +258,7 @@
     .tip-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .tip-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 12px 22px; border-radius: 8px; transition: transform 0.15s, opacity 0.2s; font-family: var(--sans); }
     .tip-btn:hover { transform: translateY(-2px); opacity: 0.88; }
-    .tip-bmc { background: #FFDD00; color: #1a1a1a; }
-    .tip-pp  { background: #003087; color: white; }
+    .tip-kofi { background: var(--blue); color: white; border: none; cursor: pointer; }
 
     /* FOOTER */
     footer { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; border-top: 1px solid var(--border); background: var(--white); }
@@ -550,8 +549,7 @@
   <h3>¿Te gustó el contenido?</h3>
   <p>Si mi página te gustó, te ayudó o te divirtió, puedes invitarme un café.</p>
   <div class="tip-buttons">
-    <div id="kofi-btn"></div>
-    <a href="https://paypal.me" target="_blank" class="tip-btn tip-pp">PayPal</a>
+    <button onclick="openKofi()" class="tip-btn tip-kofi">☕ Invítame un café</button>
   </div>
   <p style="margin-top:24px;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">Gracias por leer.</p>
 </section>
@@ -986,7 +984,13 @@ document.addEventListener('keydown', function(e){
   else if(e.key.length === 1 && /[a-záéíóúüñA-ZÁÉÍÓÚÜÑ]/.test(e.key)){ e.preventDefault(); wordleKey(e.key.toUpperCase()); }
 });
 </script>
-<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-<script type='text/javascript'>kofiwidget2.init('Invítame un café', '#1a47b8', 'Q5Q41Z71PE');kofiwidget2.draw('kofi-btn');</script>
+<script>
+function openKofi() {
+  const w = 480, h = 640;
+  const left = Math.round((screen.width - w) / 2);
+  const top = Math.round((screen.height - h) / 2);
+  window.open('https://ko-fi.com/Q5Q41Z71PE', 'kofi', `width=${w},height=${h},left=${left},top=${top},scrollbars=yes,resizable=yes`);
+}
+</script>
 </body>
 </html>
