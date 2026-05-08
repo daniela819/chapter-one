@@ -716,10 +716,13 @@ renderBooks('2026');
 // ── AI RECOMMENDATIONS ──
 function toggleGenre(btn){ btn.classList.toggle('active'); }
 
-async function getRecommendations() {
+let shownBooks = [];
+
+async function getRecommendations(isMore = false) {
   const book = document.getElementById('recBook').value.trim();
   const genres = [...document.querySelectorAll('.genre-btn.active')].map(b=>b.textContent).join(', ');
   if(!book && !genres){ document.getElementById('recBook').focus(); return; }
+  if(!isMore) shownBooks = [];
   const btn = document.getElementById('recBtn');
   btn.disabled = true;
   document.getElementById('recBtnText').textContent = 'Buscando...';
@@ -730,16 +733,17 @@ async function getRecommendations() {
     const res = await fetch('/api/recommend', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ book, genres })
+      body: JSON.stringify({ book, genres, exclude: shownBooks })
     });
     const recs = await res.json();
     if(!res.ok) throw new Error(recs.error);
+    shownBooks = [...shownBooks, ...recs.map(r => r.title)];
     renderRecs(recs, book, genres);
   } catch(e) {
     document.getElementById('recResults').innerHTML = `<div class="rec-placeholder"><div class="rec-placeholder-icon">😔</div><p>Algo salió mal. Intenta de nuevo en un momento.</p></div>`;
   }
   btn.disabled = false;
-  document.getElementById('recBtnText').textContent = '✨ Recomiéndame algo';
+  document.getElementById('recBtnText').textContent = '✨ Encontrar mi próximo libro';
 }
 
 async function fetchCover(title, author, idx) {
@@ -776,7 +780,10 @@ function renderRecs(recs, book, genres) {
           <div class="rec-book-author">${r.author}</div>
           <div class="rec-book-why">${r.why}</div>
         </div>
-      </div>`).join('')}`;
+      </div>`).join('')}
+    <button onclick="getRecommendations(true)" style="width:100%;margin-top:8px;padding:12px;background:transparent;border:1.5px solid var(--lavanda);border-radius:10px;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--lavanda);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='var(--lav-lt)'" onmouseout="this.style.background='transparent'">
+      Ya los leí, recomiéndame otros →
+    </button>`;
   recs.forEach((r, i) => fetchCover(r.title, r.author, i));
 }
 

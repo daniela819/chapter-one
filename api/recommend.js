@@ -6,13 +6,18 @@ module.exports = async function handler(req, res) {
 
     const book = req.body?.book;
     const genres = req.body?.genres;
+    const exclude = req.body?.exclude || [];
 
     if (!book && !genres) return res.status(400).json({ error: 'Missing book or genres' });
+
+    const excludeNote = exclude.length > 0
+      ? `\n\nNO recomiendes estos libros que ya se mostraron antes: ${exclude.join(', ')}.`
+      : '';
 
     const prompt = book
       ? `Eres una experta en literatura. Una persona leyó "${book}"${genres ? ` y le interesan géneros como: ${genres}` : ''} y quiere saber qué leer a continuación.
 
-IMPORTANTE: Solo recomienda libros que REALMENTE EXISTEN. El título y el autor deben ser 100% exactos y verificables. No inventes ni combines títulos. Si no estás segura de un título exacto, elige otro libro del que sí estés completamente segura.
+IMPORTANTE: Solo recomienda libros que REALMENTE EXISTEN. El título y el autor deben ser 100% exactos y verificables. No inventes ni combines títulos. Si no estás segura de un título exacto, elige otro libro del que sí estés completamente segura.${excludeNote}
 
 Recomienda exactamente 3 libros reales y publicados. Responde ÚNICAMENTE en JSON válido, sin texto extra, sin markdown, sin backticks. Formato:
 [{"title":"título exacto del libro","author":"nombre exacto del autor","why":"Una oración corta y específica de por qué le va a gustar si disfrutó ${book}","color":"#xxxxxx"}]
@@ -20,7 +25,7 @@ Recomienda exactamente 3 libros reales y publicados. Responde ÚNICAMENTE en JSO
 Los colores deben ser bonitos tipo #1A47B8 o #7B74D4, uno diferente por libro. Why debe ser conversacional y entusiasta, máximo 20 palabras.`
       : `Eres una experta en literatura. Recomienda exactamente 3 libros excelentes del género ${genres}.
 
-IMPORTANTE: Solo recomienda libros que REALMENTE EXISTEN. El título y el autor deben ser 100% exactos y verificables. No inventes ni combines títulos.
+IMPORTANTE: Solo recomienda libros que REALMENTE EXISTEN. El título y el autor deben ser 100% exactos y verificables. No inventes ni combines títulos.${excludeNote}
 
 Responde ÚNICAMENTE en JSON válido, sin texto extra, sin markdown, sin backticks. Formato:
 [{"title":"título exacto del libro","author":"nombre exacto del autor","why":"Una oración corta y entusiasta de por qué este libro es imprescindible","color":"#xxxxxx"}]
