@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>chapter one. — book club & blog</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -574,6 +576,17 @@
 </div>
 
 <script>
+firebase.initializeApp({
+  apiKey: "AIzaSyA5cwP1hZpezpbYYRNyAQ_GF34PlYqXY4E",
+  authDomain: "chapter-one---trivia-946c4.firebaseapp.com",
+  databaseURL: "https://chapter-one---trivia-946c4-default-rtdb.firebaseio.com",
+  projectId: "chapter-one---trivia-946c4",
+  storageBucket: "chapter-one---trivia-946c4.firebasestorage.app",
+  messagingSenderId: "162957754729",
+  appId: "1:162957754729:web:c752d7dc042e974658fdf8"
+});
+</script>
+<script>
 // ── BOOK DATA ──
 const books = [
   // 2026
@@ -802,14 +815,60 @@ function answerTrivia(i){
 }
 
 function renderTriviaEnd(){
-  const msg = tScore>=8?'¡Eres una lectora experta! 🏆':tScore>=5?'¡Muy bien! Claramente lees con atención 📚':'¡Hay que leer más! Pero por eso estamos aquí 😄';
+  const msg = tScore>=8?'¡Eres una lectora experta!':tScore>=5?'¡Muy bien! Claramente lees con atención':'¡Hay que leer más! Pero por eso estamos aquí';
+  const emoji = tScore>=8?'🏆':tScore>=5?'📚':'📖';
   document.getElementById('triviaContent').innerHTML=`
     <div style="text-align:center;padding:20px 0;">
-      <div style="font-size:48px;margin-bottom:16px;">${tScore>=8?'🏆':tScore>=5?'📚':'📖'}</div>
-      <div style="font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);margin-bottom:10px;">${tScore}/10 puntos</div>
+      <div style="font-size:48px;margin-bottom:16px;">${emoji}</div>
+      <div style="font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);margin-bottom:8px;">${tScore}/10 puntos</div>
       <div style="font-size:15px;color:var(--muted);margin-bottom:28px;">${msg}</div>
-      <button class="btn-primary" onclick="openTrivia()">Jugar de nuevo</button>
+      <div style="background:var(--bg2);border-radius:12px;padding:24px;margin-bottom:20px;">
+        <div style="font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--lavanda);margin-bottom:14px;">¿Cómo te llamas?</div>
+        <div style="display:flex;gap:10px;">
+          <input id="tName" type="text" placeholder="Tu nombre..." maxlength="24"
+            style="flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--sans);font-size:14px;outline:none;background:var(--white);"
+            onkeydown="if(event.key==='Enter') submitTriviaScore()">
+          <button class="btn-primary" onclick="submitTriviaScore()">Ver tablero →</button>
+        </div>
+      </div>
+      <button onclick="openTrivia()" style="font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:var(--sans);">Jugar de nuevo</button>
     </div>`;
+  document.getElementById('tName').focus();
+}
+
+function submitTriviaScore(){
+  const name = (document.getElementById('tName').value || '').trim();
+  if(!name) { document.getElementById('tName').style.borderColor='#dc2626'; return; }
+  const db = firebase.database();
+  db.ref('trivia_scores').push({ name, score: tScore, date: Date.now() })
+    .then(() => showLeaderboard())
+    .catch(() => showLeaderboard());
+}
+
+function showLeaderboard(){
+  document.getElementById('triviaContent').innerHTML=`<div style="text-align:center;padding:20px 0;font-size:14px;color:var(--muted);">Cargando tablero...</div>`;
+  firebase.database().ref('trivia_scores').orderByChild('score').once('value', snap => {
+    const entries = [];
+    snap.forEach(child => entries.push(child.val()));
+    entries.sort((a,b) => b.score - a.score || a.date - b.date);
+    const medals = ['🥇','🥈','🥉'];
+    const rows = entries.slice(0,15).map((e,i) => `
+      <div style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+        <span style="font-size:${i<3?'20px':'13px'};text-align:center;">${i<3?medals[i]:i+1}</span>
+        <span style="font-size:14px;font-weight:600;color:var(--ink);">${e.name}</span>
+        <span style="font-size:13px;font-weight:700;color:var(--lavanda);">${e.score}/10</span>
+      </div>`).join('');
+    document.getElementById('triviaContent').innerHTML=`
+      <div style="padding:8px 0;">
+        <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);margin-bottom:4px;">Tablero de honor</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px;">Los mejores lectores del club</div>
+        ${rows || '<div style="font-size:14px;color:var(--muted);padding:20px 0;">Sé el primero en el tablero.</div>'}
+        <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;">
+          <button class="btn-primary" onclick="openTrivia()">Jugar de nuevo</button>
+          <button onclick="closeTrivia()" style="font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:var(--sans);">Cerrar</button>
+        </div>
+      </div>`;
+  });
 }
 
 // ── WORDLE ──
