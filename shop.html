@@ -37,9 +37,12 @@
     .shop-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 42px); font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 12px; }
     .shop-desc { font-size: 15px; color: var(--muted); max-width: 520px; }
 
-    .shop-body { padding: 52px; min-height: 60vh; overflow-x: hidden; }
-    .shop-body iframe { max-width: 100% !important; }
-    #collection-component-1778208464993 { width: 100%; }
+    .shop-body { padding: 52px; min-height: 60vh; }
+    #collection-component-1778208464993 { width: 100%; max-width: 100%; }
+    @media (max-width: 600px) {
+      .shop-body { padding: 24px 16px; }
+      #collection-component-1778208464993 .shopify-buy__product { width: calc(50% - 10px) !important; max-width: calc(50% - 10px) !important; margin-left: 10px !important; }
+    }
 
     /* FOOTER */
     footer { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; border-top: 1px solid var(--border); background: var(--white); }
