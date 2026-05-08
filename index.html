@@ -858,9 +858,10 @@ function submitTriviaScore(){
 
 function showLeaderboard(){
   document.getElementById('triviaContent').innerHTML=`<div style="text-align:center;padding:20px 0;font-size:14px;color:var(--muted);">Cargando tablero...</div>`;
-  firebase.database().ref('trivia_scores').get().then(snap => {
-    const entries = [];
-    snap.forEach(child => entries.push(child.val()));
+  fetch('https://chapter-one---trivia-946c4-default-rtdb.firebaseio.com/trivia_scores.json')
+    .then(r => r.json())
+    .then(data => {
+    const entries = data ? Object.values(data) : [];
     entries.sort((a,b) => b.score - a.score || a.date - b.date);
     const medals = ['🥇','🥈','🥉'];
     const rows = entries.map((e,i) => {
@@ -893,6 +894,7 @@ function showLeaderboard(){
       </div>`;
   });
 }
+
 
 // ── WORDLE ──
 const wordleWords = ['LEER','LIBRO','PAGINA','AUTOR','TRAMA','NOVELA','FICCION','CLUB'];
