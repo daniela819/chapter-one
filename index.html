@@ -716,12 +716,13 @@ function toggleGenre(btn){ btn.classList.toggle('active'); }
 
 async function getRecommendations() {
   const book = document.getElementById('recBook').value.trim();
-  if(!book){ document.getElementById('recBook').focus(); return; }
   const genres = [...document.querySelectorAll('.genre-btn.active')].map(b=>b.textContent).join(', ');
+  if(!book && !genres){ document.getElementById('recBook').focus(); return; }
   const btn = document.getElementById('recBtn');
   btn.disabled = true;
   document.getElementById('recBtnText').textContent = 'Buscando...';
-  document.getElementById('recResults').innerHTML = `<div class="rec-loading"><div class="rec-spinner"></div><p>Buscando recomendaciones para fans de "${book}"...</p></div>`;
+  const loadingMsg = book ? `Buscando recomendaciones para fans de "${book}"...` : `Buscando los mejores libros de ${genres}...`;
+  document.getElementById('recResults').innerHTML = `<div class="rec-loading"><div class="rec-spinner"></div><p>${loadingMsg}</p></div>`;
 
   try {
     const res = await fetch('/api/recommend', {
@@ -731,7 +732,7 @@ async function getRecommendations() {
     });
     const recs = await res.json();
     if(!res.ok) throw new Error(recs.error);
-    renderRecs(recs, book);
+    renderRecs(recs, book, genres);
   } catch(e) {
     document.getElementById('recResults').innerHTML = `<div class="rec-placeholder"><div class="rec-placeholder-icon">😔</div><p>Algo salió mal. Intenta de nuevo en un momento.</p></div>`;
   }
@@ -739,19 +740,38 @@ async function getRecommendations() {
   document.getElementById('recBtnText').textContent = '✨ Recomiéndame algo';
 }
 
-function renderRecs(recs, book) {
+async function fetchCover(title, author, idx) {
+  try {
+    const q = encodeURIComponent(`${title} ${author}`);
+    const res = await fetch(`https://openlibrary.org/search.json?q=${q}&limit=1&fields=cover_i`);
+    const data = await res.json();
+    const coverId = data.docs?.[0]?.cover_i;
+    if (!coverId) return;
+    const img = document.getElementById(`cover-${idx}`);
+    if (!img) return;
+    const url = `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`;
+    img.src = url;
+    img.style.display = 'block';
+  } catch {}
+}
+
+function renderRecs(recs, book, genres) {
   if(!recs.length){ document.getElementById('recResults').innerHTML=`<div class="rec-placeholder"><p>No encontré recomendaciones. Intenta con otro libro.</p></div>`; return; }
+  const header = book ? `Si te gustó "${book}", prueba con:` : `Los mejores libros de ${genres}:`;
   document.getElementById('recResults').innerHTML = `
-    <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--lavanda);margin-bottom:16px;">Si te gustó "${book}", prueba con:</p>
-    ${recs.map(r=>`
+    <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--lavanda);margin-bottom:16px;">${header}</p>
+    ${recs.map((r,i)=>`
       <div class="rec-book-card">
-        <div class="rec-book-cover" style="background:${r.color}20;border:1px solid ${r.color}40;"></div>
+        <div class="rec-book-cover" style="background:${r.color}20;border:1px solid ${r.color}40;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+          <img id="cover-${i}" style="width:100%;height:100%;object-fit:cover;display:none;" alt="${r.title}">
+        </div>
         <div>
           <div class="rec-book-title">${r.title}</div>
           <div class="rec-book-author">${r.author}</div>
           <div class="rec-book-why">${r.why}</div>
         </div>
       </div>`).join('')}`;
+  recs.forEach((r, i) => fetchCover(r.title, r.author, i));
 }
 
 // ── TRIVIA ──

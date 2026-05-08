@@ -7,12 +7,19 @@ module.exports = async function handler(req, res) {
     const book = req.body?.book;
     const genres = req.body?.genres;
 
-    if (!book) return res.status(400).json({ error: 'Missing book' });
+    if (!book && !genres) return res.status(400).json({ error: 'Missing book or genres' });
 
-    const prompt = `Eres una lectora apasionada y experta en literatura. Una persona leyó "${book}"${genres ? ` y le interesan géneros como: ${genres}` : ''} y quiere saber qué leer a continuación.
+    const prompt = book
+      ? `Eres una lectora apasionada y experta en literatura. Una persona leyó "${book}"${genres ? ` y le interesan géneros como: ${genres}` : ''} y quiere saber qué leer a continuación.
 
 Recomienda exactamente 3 libros similares. Responde ÚNICAMENTE en JSON válido, sin texto extra, sin markdown, sin backticks. Formato:
 [{"title":"...","author":"...","why":"Una oración corta y específica de por qué le va a gustar si disfrutó ${book}","color":"#xxxxxx"}]
+
+Los colores deben ser colores bonitos tipo #1A47B8 o #7B74D4 o similares, uno diferente por libro. Why debe ser conversacional y entusiasta, máximo 20 palabras.`
+      : `Eres una lectora apasionada y experta en literatura. Recomienda exactamente 3 libros excelentes del género ${genres}.
+
+Responde ÚNICAMENTE en JSON válido, sin texto extra, sin markdown, sin backticks. Formato:
+[{"title":"...","author":"...","why":"Una oración corta y entusiasta de por qué este libro es imprescindible en este género","color":"#xxxxxx"}]
 
 Los colores deben ser colores bonitos tipo #1A47B8 o #7B74D4 o similares, uno diferente por libro. Why debe ser conversacional y entusiasta, máximo 20 palabras.`;
 
