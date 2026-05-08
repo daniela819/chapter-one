@@ -836,13 +836,21 @@ function renderTriviaEnd(){
   document.getElementById('tName').focus();
 }
 
+let tMyName = '';
 function submitTriviaScore(){
   const name = (document.getElementById('tName').value || '').trim();
   if(!name) { document.getElementById('tName').style.borderColor='#dc2626'; return; }
-  const db = firebase.database();
-  db.ref('trivia_scores').push({ name, score: tScore, date: Date.now() })
+  tMyName = name;
+  document.getElementById('triviaContent').innerHTML=`<div style="text-align:center;padding:20px 0;font-size:14px;color:var(--muted);">Guardando tu score...</div>`;
+  firebase.database().ref('trivia_scores').push({ name, score: tScore, date: Date.now() })
     .then(() => showLeaderboard())
-    .catch(() => showLeaderboard());
+    .catch(err => {
+      document.getElementById('triviaContent').innerHTML=`
+        <div style="text-align:center;padding:20px 0;">
+          <div style="font-size:14px;color:#dc2626;margin-bottom:16px;">No se pudo guardar tu score. Revisa tu conexión.</div>
+          <button class="btn-primary" onclick="renderTriviaEnd()">Intentar de nuevo</button>
+        </div>`;
+    });
 }
 
 function showLeaderboard(){
@@ -852,12 +860,15 @@ function showLeaderboard(){
     snap.forEach(child => entries.push(child.val()));
     entries.sort((a,b) => b.score - a.score || a.date - b.date);
     const medals = ['🥇','🥈','🥉'];
-    const rows = entries.map((e,i) => `
-      <div style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+    const rows = entries.map((e,i) => {
+      const isMe = e.name===tMyName && e.score===tScore;
+      return `
+      <div style="display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);${isMe?'background:var(--lav-lt);border-radius:8px;padding-left:8px;padding-right:8px;':''}">
         <span style="font-size:${i<3?'20px':'13px'};text-align:center;">${i<3?medals[i]:i+1}</span>
-        <span style="font-size:14px;font-weight:600;color:var(--ink);">${e.name}</span>
+        <span style="font-size:14px;font-weight:600;color:${isMe?'var(--lavanda)':'var(--ink)'};">${e.name}${isMe?' ← tú':''}</span>
         <span style="font-size:13px;font-weight:700;color:var(--lavanda);">${e.score}/10</span>
-      </div>`).join('');
+      </div>`;
+    }).join('');
     document.getElementById('triviaContent').innerHTML=`
       <div style="padding:8px 0;">
         <div style="font-family:var(--serif);font-size:20px;font-weight:600;color:var(--ink);margin-bottom:4px;">Tablero de honor</div>
