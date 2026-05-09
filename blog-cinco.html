@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog — chapter one.</title>
+  <title>5 años de book club — chapter one.</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,24 +31,27 @@
     .nav-cta { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--white); background: var(--blue); padding: 8px 18px; border-radius: 6px; transition: background 0.2s; }
     .nav-cta:hover { background: var(--lavanda); }
 
-    /* BLOG INDEX */
+    /* BLOG */
     .blog-header { padding: 64px 52px 40px; border-bottom: 1px solid var(--border); }
     .blog-label { font-size: 10px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--lavanda); display: block; margin-bottom: 16px; }
-    .blog-page-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 42px); font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 12px; }
-    .blog-page-desc { font-size: 15px; color: var(--muted); max-width: 520px; }
+    .blog-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 42px); font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 12px; }
+    .blog-date { font-size: 13px; color: var(--muted); }
 
-    .blog-list-wrap { padding: 52px; }
-    .blog-list { display: flex; flex-direction: column; }
-    .blog-row { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; transition: opacity 0.2s; }
-    .blog-row:last-child { border-bottom: none; }
-    .blog-row:hover { opacity: 0.7; }
-    .blog-row:hover .blog-row-title { color: var(--blue); }
-    .blog-row-title { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--ink); transition: color 0.2s; line-height: 1.3; }
-    .blog-row-excerpt { display: block; font-size: 13px; font-weight: 400; font-family: var(--sans); color: var(--muted); margin-top: 5px; line-height: 1.4; }
-    .blog-row-arrow { font-size: 16px; color: var(--lavanda); }
-    .tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
-    .tag-blue { background: var(--blue-lt); color: var(--blue); }
-    .tag-lav  { background: var(--lav-lt);  color: var(--lavanda); }
+    .blog-body { padding: 64px 52px; max-width: 780px; }
+    .blog-post { font-size: 16px; line-height: 1.9; color: var(--ink); }
+    .blog-post p { margin-bottom: 20px; }
+    .blog-post em { font-style: italic; }
+    .blog-post strong { font-weight: 600; }
+    .blog-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    .blog-cta { margin-top: 48px; padding: 40px; background: var(--lav-lt); border-radius: 12px; text-align: center; }
+    .blog-cta p { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+    .blog-cta .cta-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .blog-cta .cta-note { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 10px; }
+    .blog-cta .cta-thanks { font-size: 13px; color: var(--muted); margin-top: 18px; }
+    .btn-kofi { display: inline-block; background: var(--blue); color: var(--white); font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 28px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+    .btn-kofi:hover { background: var(--lavanda); }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 40px; transition: color 0.2s; }
+    .back-link:hover { color: var(--blue); }
 
     /* FOOTER */
     footer { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; border-top: 1px solid var(--border); background: var(--white); }
@@ -68,8 +71,7 @@
     @media (max-width: 960px) {
       nav { padding: 0 20px; } .nav-links { display: none; }
       .blog-header { padding: 40px 20px 28px; }
-      .blog-list-wrap { padding: 32px 20px; }
-      .blog-row { gap: 12px; }
+      .blog-body { padding: 40px 20px; }
       footer { grid-template-columns: 1fr 1fr; } .footer-col { padding: 28px 20px; }
       .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 6px; text-align: center; }
     }
@@ -101,30 +103,34 @@
 </nav>
 
 <div class="blog-header">
-  <span class="blog-label">Blog · reseñas y reflexiones</span>
-  <h1 class="blog-page-title">Lo que estoy leyendo y pensando.</h1>
-  <p class="blog-page-desc">Reseñas, reflexiones y todo lo que pasa en mi cabeza mientras leo.</p>
+  <span class="blog-label">Blog · Abril 2026</span>
+  <h1 class="blog-title">Lo que cinco años de book club me enseñaron sobre escuchar</h1>
+  <p class="blog-date">Por Daniela · Abril 2026</p>
 </div>
 
-<div class="blog-list-wrap">
-  <div class="blog-list">
-    <a href="/blog-cinco" class="blog-row">
-      <span class="tag tag-blue">Abril 2026</span>
-      <span>
-        <span class="blog-row-title">Lo que cinco años de book club me enseñaron sobre escuchar</span>
-        <span class="blog-row-excerpt">Y sin pensarlo, ya tenemos 5 años. No me vienen los títulos ni las portadas — me vienen los aprendizajes.</span>
-      </span>
-      <span class="blog-row-arrow">→</span>
-    </a>
-    <a href="/blog-abril" class="blog-row">
-      <span class="tag tag-lav">Abril 2026</span>
-      <span>
-        <span class="blog-row-title">Abril: libros pésimos y calor en Mty 📚</span>
-        <span class="blog-row-excerpt">No fue un mes agradable de lectura, pero como quiera leímos. Cinco libros, una librería nueva y mucho calor.</span>
-      </span>
-      <span class="blog-row-arrow">→</span>
-    </a>
-  </div>
+<div class="blog-body">
+  <a href="/blog" class="back-link">← Volver al blog</a>
+
+  <article class="blog-post">
+    <p>Y sin pensarlo, ya tenemos 5 años en el bookclub. ¿En qué momento? No lo puedo creer. Pero cuando lo pienso, no me vienen primero los títulos, ni las portadas, ni las reseñas. Me vienen los aprendizajes. Descubrí que me encanta compartir.</p>
+    <p>Antes de leer con otras personas, me quedaba con mis pensamientos. Guardaba mis ideas, mis análisis, mis dudas y creo que hasta podría olvidar algunos libros. El bookclub me ayudó a tener perspectivas. A tener otras versiones de las historias. A conocer personas. El bookclub lo empecé con Dannu y <em>La sombra</em>. Y luego entró mi mamá. Y así, poco a poco, se fueron uniendo más personas. Unos llegaron, se fueron, otros se quedaron, otros nuevos llegaron. Y poco a poco he construido una comunidad. Chiquita, pero de calidad.</p>
+    <p>Siempre busco la manera de mejorar. Recuerdo que solo nos conectábamos y hablábamos del libro. Después les compartía mi pantalla y hablaba del autor (literal abría ppt) y luego empecé a dar contexto histórico del libro. Y ahora todo lo hago en Miro: seleccionamos nuestra silla —claro, tenemos sillas virtuales donde los integrantes escogen su sillón para la sesión—, hablamos del autor, sus libros, contexto del libro, su forma de escribir, preguntas, trivias, le damos puntuación al libro. Total, trato de involucrarlos en el libro, en la lectura.</p>
+    <p>Varios me cuestionan porque lo hago gratis. Pero todo cambia: me da muchísimo gusto, me da paz cuando las personas me dicen "gracias a ti puedo decir que leí 12 libros en el año", "gracias por impulsarme a leer, porque si no estoy en el bookclub, no leo". Y también comentarios de gente lectora que no creí que me agradecerían, pero ellos me agradecen porque les estoy dando a conocer más autores, libros que posiblemente nunca leerían.</p>
+    <p>Es un hábito muy noble. A mí me permite expandir mi creatividad. Soy diseñadora y leer es una de las actividades donde puedo explotar mi creatividad. Te imaginas tantas cosas. Puedes explorar todos los sentimientos en una lectura, desde paz hasta enojarte, llorar.</p>
+    <p>El bookclub me ha enseñado a aceptar todo comentario. A confirmar que no hay ninguna respuesta correcta. Que toda opinión es válida. Escuchar, al final, creo que también es leer.</p>
+
+    <hr class="blog-divider">
+
+    <p>Si llegaste hasta aquí y eres miembro del bookclub, gracias, gracias, gracias por ser parte de esto. Y si no eres miembro, gracias por leer y espero verte en la próxima sesión.</p>
+
+    <div class="blog-cta">
+      <p><strong>¿Te gustó el contenido?</strong></p>
+      <p class="cta-sub">Si mi página te gustó, te ayudó o te divirtió, puedes invitarme un café.</p>
+      <button onclick="openKofi()" class="btn-kofi">☕ Invítame un café</button>
+      <p class="cta-note">Los montos están en USD - dólares</p>
+      <p class="cta-thanks">Gracias por leer.</p>
+    </div>
+  </article>
 </div>
 
 <footer>
@@ -144,5 +150,12 @@
   <p style="font-size:11px;color:var(--muted);">Hecho con amor y muchos libros.</p>
 </div>
 
+<script>
+function openKofi() {
+  var w = 500, h = 720;
+  window.open('https://ko-fi.com/danielacardonavilla/tip', 'kofi',
+    'width='+w+',height='+h+',left='+Math.round((screen.width-w)/2)+',top='+Math.round((screen.height-h)/2)+',scrollbars=yes');
+}
+</script>
 </body>
 </html>

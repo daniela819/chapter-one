@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abril 2026 — chapter one.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:    #1A47B8; --blue-lt: #EEF2FF;
+      --lavanda: #7B74D4; --lav-lt:  #F3F2FD;
+      --navy:    #1A1A2E; --bg:      #FAFAFA;
+      --white:   #ffffff;
+      --ink:     #16162a; --muted:   #6b7280;
+      --border:  #e5e4f0;
+      --serif: 'Lora', Georgia, serif;
+      --sans:  'Raleway', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,250,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 62px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-name { font-size: 17px; font-weight: 700; color: var(--ink); }
+    .nav-logo-sub  { font-size: 9px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavanda); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .nav-cta { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--white); background: var(--blue); padding: 8px 18px; border-radius: 6px; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--lavanda); }
+
+    /* BLOG */
+    .blog-header { padding: 64px 52px 40px; border-bottom: 1px solid var(--border); }
+    .blog-label { font-size: 10px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--lavanda); display: block; margin-bottom: 16px; }
+    .blog-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 42px); font-weight: 600; color: var(--ink); line-height: 1.2; margin-bottom: 12px; }
+    .blog-date { font-size: 13px; color: var(--muted); }
+
+    .blog-body { padding: 64px 52px; max-width: 780px; }
+    .blog-post { font-size: 16px; line-height: 1.9; color: var(--ink); }
+    .blog-post p { margin-bottom: 20px; }
+    .blog-post em { font-style: italic; }
+    .blog-post strong { font-weight: 600; }
+    .blog-divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    .blog-cta { margin-top: 48px; padding: 40px; background: var(--lav-lt); border-radius: 12px; text-align: center; }
+    .blog-cta p { font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+    .blog-cta .cta-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .blog-cta .cta-note { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 10px; }
+    .blog-cta .cta-thanks { font-size: 13px; color: var(--muted); margin-top: 18px; }
+    .btn-kofi { display: inline-block; background: var(--blue); color: var(--white); font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 28px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+    .btn-kofi:hover { background: var(--lavanda); }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; margin-bottom: 40px; transition: color 0.2s; }
+    .back-link:hover { color: var(--blue); }
+
+    /* FOOTER */
+    footer { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; border-top: 1px solid var(--border); background: var(--white); }
+    .footer-col { padding: 40px 52px; border-right: 1px solid var(--border); }
+    .footer-col:last-child { border-right: none; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-name { font-size: 16px; font-weight: 700; color: var(--ink); }
+    .footer-logo-sub { font-size: 9px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavanda); }
+    .footer-tagline { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    footer h4 { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); margin-bottom: 16px; }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    footer a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--blue); }
+    .footer-bottom { padding: 18px 52px; display: flex; justify-content: space-between; align-items: center; background: var(--white); border-top: 1px solid var(--border); }
+    .footer-bottom p { font-size: 11px; color: var(--muted); }
+
+    @media (max-width: 960px) {
+      nav { padding: 0 20px; } .nav-links { display: none; }
+      .blog-header { padding: 40px 20px 28px; }
+      .blog-body { padding: 40px 20px; }
+      footer { grid-template-columns: 1fr 1fr; } .footer-col { padding: 28px 20px; }
+      .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <rect x="4" y="8" width="18" height="20" rx="3" stroke="#1A47B8" stroke-width="2"/>
+      <line x1="13" y1="8" x2="13" y2="28" stroke="#1A47B8" stroke-width="2"/>
+      <path d="M22 13 C26 13 28 15.5 28 18 C28 20.5 26 23 22 23" stroke="#1A47B8" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+    <div>
+      <div class="nav-logo-name">chapter one.</div>
+      <div class="nav-logo-sub">Book Club · 2020</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/blog" class="active">Blog</a></li>
+    <li><a href="/#libreria">Librería</a></li>
+    <li><a href="/#que-leer">¿Qué leer?</a></li>
+    <li><a href="/#juegos">Juegos</a></li>
+    <li><a href="/#club">El club</a></li>
+    <li><a href="/shop">Shop</a></li>
+  </ul>
+  <a href="https://chat.whatsapp.com/GihitV67PUwCVlPk3OY7HS" class="nav-cta" target="_blank" rel="noopener">Unirme al bookclub</a>
+</nav>
+
+<div class="blog-header">
+  <span class="blog-label">Blog · Abril 2026</span>
+  <h1 class="blog-title">Abril: libros pésimos y calor en Mty 📚</h1>
+  <p class="blog-date">Por Daniela · Abril 2026</p>
+</div>
+
+<div class="blog-body">
+  <a href="/blog" class="back-link">← Volver al blog</a>
+
+  <article class="blog-post">
+    <p>Hola,</p>
+    <p>Te escribo desde mi escritorio. Me hace falta un cuadro porque mi vista es una pared. Este abril cumplió años mi papá, vino una amiga a Mty, supe el género del bebé de otra amiga y empezó el calorcito. Y yo, escogiendo los pésimos libros del mes. No fue un mes agradable de lectura, pero como quiera leímos.</p>
+    <p>Aquí va lo que leí:</p>
+    <p>Empecé con <em>Todos somos villanos</em> de M.L. Rio. La sufrí mucho. Luego dicen que hay libros que no conectamos en el momento, ese fue uno. No entendía qué quería transmitir el autor. El libro trataba de un grupo de actores, pelea de personajes, luego se iban a un lago y no sé, practicaban escenas pero no hubo trama, no pasaba nada. Lo terminé porque tenía que.</p>
+    <p>Seguí leyendo <em>Hello Beautiful</em>. Me lo recomendó Clari. Total, otro libro igualito que leí el mes pasado: <em>Blue Sisters</em> de Coco Mellors. Y súper curioso, también trataba de 4 hermanas. Luego a veces me sucede que leo un libro y el siguiente, sin querer, habla también algo del anterior. En fin, <em>Hello Beautiful</em> me gustó más que <em>Blue Sisters</em>. Sigo sin entender el nombre del libro, pero bueno, un libro no corto. Pero también de 4 hermanas, cada quien con sus problemas. Secretos.</p>
+    <p>Luego me puse a reflexionar sobre los secretos. ¿Es mejor guardarlos o decir la verdad? ¿Le dices a tu hija que su papá las abandonó y se casó con su tía? ¿Cómo manejarías esa situación? Me gustó ese tipo de dilemas porque cada personaje está construido con un análisis y te das cuenta de que no todos reaccionamos igual.</p>
+    <p>Bueno, luego leí <em>El método de Elisa</em> de Mamen de Blas. Está como cozy, para pasar el rato. Es un libro corto. La protagonista se creía escritora y se disfrazaba de sus autoras favoritas, porque dice que si uno quiere ser alguien, hay que disfrazarse o actuar como ellos para lograrlo (y sí, sí lo creo).</p>
+    <p>Seguí con <em>Un apartamento en París</em> de Lucy Foley. Este fue el libro del mes del bookclub, Chapter One. Me gustó, pero hmm, llegó un punto en que la autora no supo desarrollar la trama o tenía prisa por terminarlo porque al final solo empezó a sacar cosas que ni al caso. Pero para no spoilear, me gustaron mucho 2 temas que se pudieron desarrollar muy bien, pero lamentablemente no me gustó cómo se desarrolló la historia.</p>
+    <p>Terminamos con <em>Someone Like Us</em> de Dinaw Mengestu. Me lo prestó Andrés. Me sacó de lo que he leído últimamente. Hace mucho que no leía un libro de ese estilo. Inmigración. Familia africana, Etiopía. Migran a Chicago y pues es como la narración de cómo viven siendo inmigrantes. El racismo, la autoridad, la identidad... todo eso está ahí, pero contado de una forma muy íntima. No es un libro que te grite las cosas, te las va soltando en conversaciones cotidianas, flashbacks, acciones que tenías que ir descifrando. Hasta el momento no sé si entendí varias cosas. Me hizo pensar en cómo la experiencia migrante no es solo mudarse de país, sino cargar con un peso invisible que moldea cada decisión, y más si eres negro en Estados Unidos. Es corto, pero te deja pensando días.</p>
+    <p>Y esto fue de libros.</p>
+
+    <hr class="blog-divider">
+
+    <p>También fui a conocer una nueva librería que acaban de abrir, se llama OfflineBooks. La verdad en redes sociales se veía top. Y, sí, está bonito: el mueble céntrico es llamativo, alto, tipo caracol. Solamente venden libros en inglés, no hay internet (ultra top) y puedes ir a leer y tomar un cafecito. Pero sí tenía muchas expectativas sobre el lugar, y la realidad estuvo un poco por debajo.</p>
+
+    <hr class="blog-divider">
+
+    <p>Y bueno, este fue mi mes. Espero que mayo venga mejor.</p>
+    <p>Empezaré a leer <em>El voluntario</em> de Jack Fairweather. Este libro lo saqué de <em>Todo está jdido*</em> de Mark Manson, donde Mark empieza a hablar de la resistencia y menciona a Witold, un polaco que se infiltra en los campos de concentración. Y justo este libro, <em>El voluntario</em>, es su historia. Ya les contaré.</p>
+    <p>Por el momento solo tengo este libro para leer y el del bookclub, que será <em>El retrato de casada</em>. Con ver la portada me aburre. Esperemos que no.</p>
+
+    <div class="blog-cta">
+      <p><strong>¿Te gustó el contenido?</strong></p>
+      <p class="cta-sub">Si mi página te gustó, te ayudó o te divirtió, puedes invitarme un café.</p>
+      <button onclick="openKofi()" class="btn-kofi">☕ Invítame un café</button>
+      <p class="cta-note">Los montos están en USD - dólares</p>
+      <p class="cta-thanks">Gracias por leer.</p>
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="footer-col">
+    <div class="footer-logo">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="18" height="20" rx="3" stroke="#1A47B8" stroke-width="2"/><line x1="13" y1="8" x2="13" y2="28" stroke="#1A47B8" stroke-width="2"/><path d="M22 13 C26 13 28 15.5 28 18 C28 20.5 26 23 22 23" stroke="#1A47B8" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      <div><div class="footer-logo-name">chapter one.</div><div class="footer-logo-sub">Book Club · 2020</div></div>
+    </div>
+    <p class="footer-tagline">Blog de reseñas y reflexiones literarias. Y un club de lectura en línea desde 2020.</p>
+  </div>
+  <div class="footer-col"><h4>Contenido</h4><ul><li><a href="/blog">Blog</a></li><li><a href="/#libreria">Librería</a></li><li><a href="/#picks">Mis picks</a></li><li><a href="/#que-leer">¿Qué leer?</a></li></ul></div>
+  <div class="footer-col"><h4>Extras</h4><ul><li><a href="/#juegos">Juegos</a></li><li><a href="/#club">El club</a></li><li><a href="/shop">Shop</a></li></ul></div>
+  <div class="footer-col"><h4>Apóyame</h4><ul><li><a href="https://ko-fi.com/Q5Q41Z71PE" target="_blank">Ko-fi</a></li></ul></div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 chapter one. Todos los derechos reservados.</p>
+  <p style="font-size:11px;color:var(--muted);">Hecho con amor y muchos libros.</p>
+</div>
+
+<script>
+function openKofi() {
+  var w = 500, h = 720;
+  window.open('https://ko-fi.com/danielacardonavilla/tip', 'kofi',
+    'width='+w+',height='+h+',left='+Math.round((screen.width-w)/2)+',top='+Math.round((screen.height-h)/2)+',scrollbars=yes');
+}
+</script>
+</body>
+</html>
