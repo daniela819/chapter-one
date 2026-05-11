@@ -54,6 +54,8 @@
     .banner-dot.reading { background: var(--lavanda); }
     .banner-dot.club { background: var(--blue); animation: ripple 2s ease-out infinite; }
     .banner-dot.next { background: #10b981; }
+    .banner-block.muted { opacity: 0.42; }
+    .banner-block.muted .banner-value { font-size: 11px; }
     @keyframes ripple { 0% { box-shadow: 0 0 0 0 rgba(26,71,184,0.6); } 70% { box-shadow: 0 0 0 8px rgba(26,71,184,0); } 100% { box-shadow: 0 0 0 0 rgba(26,71,184,0); } }
     .banner-text { display: flex; flex-direction: column; gap: 1px; }
     .banner-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
@@ -337,7 +339,7 @@
 
 <!-- BANNER -->
 <div class="banner">
-  <div class="banner-block">
+  <div class="banner-block muted">
     <div class="banner-dot done"></div>
     <div class="banner-text">
       <span class="banner-label">Terminé de leer</span>
@@ -361,7 +363,7 @@
     </div>
   </div>
   <div class="banner-divider"></div>
-  <div class="banner-block">
+  <div class="banner-block muted">
     <div class="banner-dot next"></div>
     <div class="banner-text">
       <span class="banner-label">Mi próxima lectura</span>
