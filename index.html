@@ -46,10 +46,11 @@
     .nav-cta:hover { background: var(--lavanda); }
 
     /* BANNER */
-    .banner { position: sticky; top: 62px; z-index: 99; background: var(--navy); border-bottom: 1px solid rgba(123,116,212,0.3); display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; min-height: 50px; }
+    .banner { position: sticky; top: 62px; z-index: 99; background: var(--navy); border-bottom: 1px solid rgba(123,116,212,0.3); display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr; min-height: 50px; }
     .banner-divider { background: rgba(255,255,255,0.1); }
     .banner-block { display: flex; align-items: center; gap: 14px; padding: 10px 28px; }
     .banner-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .banner-dot.done { background: #fbbf24; }
     .banner-dot.reading { background: var(--lavanda); }
     .banner-dot.club { background: var(--blue); animation: ripple 2s ease-out infinite; }
     .banner-dot.next { background: #10b981; }
@@ -337,10 +338,18 @@
 <!-- BANNER -->
 <div class="banner">
   <div class="banner-block">
+    <div class="banner-dot done"></div>
+    <div class="banner-text">
+      <span class="banner-label">Terminé de leer</span>
+      <span class="banner-value">El voluntario · <em>Jack Fairweather</em></span>
+    </div>
+  </div>
+  <div class="banner-divider"></div>
+  <div class="banner-block">
     <div class="banner-dot reading"></div>
     <div class="banner-text">
       <span class="banner-label">Ahora leyendo (yo)</span>
-      <span class="banner-value">El voluntario · <em>Jack Fairweather</em></span>
+      <span class="banner-value">El descontento · <em>Beatriz Serrano</em></span>
     </div>
   </div>
   <div class="banner-divider"></div>
@@ -356,7 +365,7 @@
     <div class="banner-dot next"></div>
     <div class="banner-text">
       <span class="banner-label">Mi próxima lectura</span>
-      <span class="banner-value">El descontento · <em>Beatriz Serrano</em></span>
+      <span class="banner-value">Qué fue de los Lighthouse · <em>Berna González Harbour</em></span>
     </div>
   </div>
 </div>
