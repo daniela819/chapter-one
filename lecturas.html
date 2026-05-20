@@ -20,14 +20,20 @@
     }
     body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-    .back-nav { padding: 28px 40px 0; }
-    .back-link { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .back-link:hover { color: var(--ink); }
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,250,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 62px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-name { font-size: 17px; font-weight: 700; color: var(--ink); }
+    .nav-logo-sub  { font-size: 9px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavanda); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: #fff; background: var(--blue); padding: 8px 18px; border-radius: 6px; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--lavanda); }
 
     .page-wrap { max-width: 640px; margin: 0 auto; padding: 48px 40px 100px; }
 
-    .page-title { font-size: 32px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-    .page-sub { font-size: 14px; font-weight: 300; color: var(--muted); margin-bottom: 36px; }
+    .page-title { font-size: 32px; font-weight: 700; color: var(--ink); margin-bottom: 28px; }
 
     .criterios { background: #f3f2fd; border-radius: 8px; padding: 16px 20px; margin-bottom: 48px; }
     .criterios-title { font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavanda); margin-bottom: 10px; }
@@ -47,7 +53,8 @@
     .book-stars { font-size: 11px; color: #fbbf24; white-space: nowrap; flex-shrink: 0; }
 
     @media (max-width: 600px) {
-      .back-nav { padding: 20px 20px 0; }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
       .page-wrap { padding: 36px 20px 80px; }
       .page-title { font-size: 26px; }
     }
@@ -55,9 +62,28 @@
 </head>
 <body>
 
-<div class="back-nav">
-  <a href="/" class="back-link">← volver</a>
-</div>
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <rect x="4" y="8" width="18" height="20" rx="3" stroke="#1A47B8" stroke-width="2"/>
+      <line x1="13" y1="8" x2="13" y2="28" stroke="#1A47B8" stroke-width="2"/>
+      <path d="M22 13 C26 13 28 15.5 28 18 C28 20.5 26 23 22 23" stroke="#1A47B8" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+    <div>
+      <div class="nav-logo-name">chapter one.</div>
+      <div class="nav-logo-sub">Book Club · 2020</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/#libreria">Librería</a></li>
+    <li><a href="/#que-leer">¿Qué leer?</a></li>
+    <li><a href="/#juegos">Juegos</a></li>
+    <li><a href="/#club">El club</a></li>
+    <li><a href="/shop">Shop</a></li>
+  </ul>
+  <a href="https://chat.whatsapp.com/GihitV67PUwCVlPk3OY7HS" class="nav-cta" target="_blank" rel="noopener">Unirme al bookclub</a>
+</nav>
 
 <div class="page-wrap">
   <h1 class="page-title">Mis lecturas</h1>
@@ -78,7 +104,7 @@
     </div>
     <div class="criterios-row">
       <span class="criterios-stars">★★☆☆☆</span>
-      <span class="criterios-desc">Estuvo bien, pero no lo recordaré. Entretenido, nada más.</span>
+      <span class="criterios-desc">Meh, creo que no lo voy a recordar. Entretenido, nada más.</span>
     </div>
     <div class="criterios-row">
       <span class="criterios-stars">★☆☆☆☆</span>
