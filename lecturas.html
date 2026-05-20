@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis lecturas · chapter one.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:    #1A47B8;
+      --lavanda: #7B74D4;
+      --navy:    #1A1A2E;
+      --bg:      #FAFAFA;
+      --ink:     #16162a;
+      --muted:   #6b7280;
+      --border:  #e5e4f0;
+      --serif:   'Lora', Georgia, serif;
+      --sans:    'Raleway', sans-serif;
+    }
+    body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .back-nav { padding: 28px 40px 0; }
+    .back-link { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--ink); }
+
+    .page-wrap { max-width: 640px; margin: 0 auto; padding: 48px 40px 100px; }
+
+    .page-title { font-size: 32px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .page-sub { font-size: 14px; font-weight: 300; color: var(--muted); margin-bottom: 36px; }
+
+    .criterios { background: #f3f2fd; border-radius: 8px; padding: 16px 20px; margin-bottom: 48px; }
+    .criterios-title { font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lavanda); margin-bottom: 10px; }
+    .criterios-row { display: flex; gap: 10px; align-items: baseline; padding: 3px 0; }
+    .criterios-stars { font-size: 10px; color: #fbbf24; width: 56px; flex-shrink: 0; letter-spacing: 1px; }
+    .criterios-desc { font-size: 11px; color: var(--muted); font-weight: 400; line-height: 1.4; }
+
+    .year-header { display: flex; justify-content: space-between; align-items: baseline; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); padding-bottom: 8px; border-bottom: 1.5px solid var(--blue); margin-bottom: 4px; margin-top: 32px; }
+    .year-count { font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; font-size: 10px; }
+
+    .book-row { display: flex; align-items: baseline; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .book-date { font-size: 10px; color: var(--muted); width: 58px; flex-shrink: 0; }
+    .book-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+    .book-main { flex: 1; min-width: 0; }
+    .book-title { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink); font-weight: 400; line-height: 1.3; }
+    .book-author { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .book-stars { font-size: 11px; color: #fbbf24; white-space: nowrap; flex-shrink: 0; }
+
+    @media (max-width: 600px) {
+      .back-nav { padding: 20px 20px 0; }
+      .page-wrap { padding: 36px 20px 80px; }
+      .page-title { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="back-nav">
+  <a href="/" class="back-link">← volver</a>
+</div>
+
+<div class="page-wrap">
+  <h1 class="page-title">Mis lecturas</h1>
+  <p class="page-sub">Todo lo que he leído desde que empezó el club</p>
+
+  <div class="criterios">
+    <p class="criterios-title">mis criterios</p>
+    <div class="criterios-row">
+      <span class="criterios-stars">★★★★★</span>
+      <span class="criterios-desc">Me quedé pensando en él mucho después de cerrarlo — emocional, personal, de impacto o los tres</span>
+    </div>
+    <div class="criterios-row">
+      <span class="criterios-stars">★★★★☆</span>
+      <span class="criterios-desc">Me resonó, lo recomendaría — personal, me movió algo</span>
+    </div>
+    <div class="criterios-row">
+      <span class="criterios-stars">★★★☆☆</span>
+      <span class="criterios-desc">Me gustó, hay cosas que rescato — buena historia o buena escritura</span>
+    </div>
+    <div class="criterios-row">
+      <span class="criterios-stars">★★☆☆☆</span>
+      <span class="criterios-desc">Estuvo bien, pero no lo recordaré — entretenido, nada más</span>
+    </div>
+    <div class="criterios-row">
+      <span class="criterios-stars">★☆☆☆☆</span>
+      <span class="criterios-desc">Lo terminé pero no me dejó nada — no conecté, lo leí por terminarlo</span>
+    </div>
+  </div>
+
+  <div class="year-header">
+    <span>2026</span>
+    <span class="year-count">2 libros</span>
+  </div>
+
+  <div class="book-row">
+    <span class="book-date">may 2026</span>
+    <div class="book-dot" style="background:#7B74D4"></div>
+    <div class="book-main">
+      <div class="book-title">El descontento</div>
+      <div class="book-author">Beatriz Serrano</div>
+    </div>
+    <span class="book-stars">★★★★★</span>
+  </div>
+
+  <div class="book-row">
+    <span class="book-date">abr 2026</span>
+    <div class="book-dot" style="background:#1A47B8"></div>
+    <div class="book-main">
+      <div class="book-title">El voluntario</div>
+      <div class="book-author">Jack Fairweather</div>
+    </div>
+    <span class="book-stars">★★★★☆</span>
+  </div>
+
+</div>
+
+</body>
+</html>
